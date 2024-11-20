@@ -36,19 +36,21 @@ def reduce(infile_name, outfile_name, is_mc):
             sparse_reduced.SetName("hData")
             sparse_reduced.Write()
         else:
-            sparse_recop = infile.Get("task-polarisation-charm-hadrons/hRecoPrompt")
+            sparse_recop = infile.Get(f"task-polarisation-charm-hadrons/hRecoPrompt{axis}")
             if not isinstance(sparse_recop, ROOT.THnSparse):
                 continue
 
             found_sparse = True
-            sparse_reconp = infile.Get("task-polarisation-charm-hadrons/hRecoNonPrompt")
+            sparse_reconp = infile.Get(f"task-polarisation-charm-hadrons/hRecoNonPrompt{axis}")
             y_bin_min = sparse_recop.GetAxis(3).FindBin(-0.7999)
             y_bin_max = sparse_recop.GetAxis(3).FindBin(0.7999)
             sparse_recop.GetAxis(3).SetRange(y_bin_min, y_bin_max)
             sparse_reconp.GetAxis(3).SetRange(y_bin_min, y_bin_max)
 
-            sparse_genp = infile.Get("task-polarisation-charm-hadrons/hGenPrompt")
-            sparse_gennp = infile.Get("task-polarisation-charm-hadrons/hGenNonPrompt")
+            sparse_genp = infile.Get(f"task-polarisation-charm-hadrons/hGenPrompt{axis}")
+            sparse_genp.SetName("hGenPrompt")
+            sparse_gennp = infile.Get(f"task-polarisation-charm-hadrons/hGenNonPrompt{axis}")
+            sparse_gennp.SetName("hGenNonPrompt")
 
             outfile.cd()
             sparse_recop_reduced = sparse_recop.Projection(len(axes_to_keep), axes_to_keep)
