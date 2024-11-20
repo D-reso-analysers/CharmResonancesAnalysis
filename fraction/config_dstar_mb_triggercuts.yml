@@ -1,0 +1,29 @@
+hadron: dstar
+
+input:
+  data: inputs/sparse_dstar_LHC22_LHC23.root
+  mc: inputs/sparse_dstar_LHC24g5_trackTuner.root
+
+pt_mins: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10., 12., 16.]
+pt_maxs: [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10., 12., 16., 24.]
+
+bdt_cuts:
+  bkg: 0.06 # same vs pT (for now, can be improved)
+  nonprompt: [0.60, 0.62, 0.64, 0.66, 0.68,
+              0.70, 0.72, 0.74, 0.76, 0.78,
+              0.80, 0.82, 0.84, 0.86, 0.88,
+              0.90, 0.92, 0.94, 0.96, 0.98] # values for cut-variation method (pT differential?)
+
+fit:
+  mass_mins: [0.1396, 0.1396, 0.1396, 0.1396, 0.1396, 0.1396, 0.1396, 0.1396, 0.1396, 0.1396, 0.1396, 0.1396]
+  mass_maxs: [0.160, 0.165, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700]
+  sgn_funcs: ["doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb"]
+  bkg_funcs: ["expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext"]
+
+output:
+  rawyields:
+    directory: rawyields
+    suffix: _dstar_LHC22_LHC23
+  efficiencies:
+    directory: efficiencies
+    suffix: _dstar_LHC24g5_trackTuner
