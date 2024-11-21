@@ -149,8 +149,8 @@ def project(input_config):
     histos_recpt_p_nocut, histos_recpt_np_nocut = [], []
     histos_genpt_p, histos_genpt_np = [], []
     for ipt, (pt_min, pt_max) in enumerate(zip(pt_mins, pt_maxs)):
-        pt_bin_min = sparse_genp.GetAxis(1).FindBin(pt_min*1.001)
-        pt_bin_max = sparse_genp.GetAxis(1).FindBin(pt_max*0.999)
+        pt_bin_min = sparse_genp.GetAxis(0).FindBin(pt_min*1.001)
+        pt_bin_max = sparse_genp.GetAxis(0).FindBin(pt_max*0.999)
         sparse_genp.GetAxis(0).SetRange(pt_bin_min, pt_bin_max)
         sparse_gennp.GetAxis(0).SetRange(pt_bin_min, pt_bin_max)
         histos_genpt_p.append(sparse_genp.Projection(0))
