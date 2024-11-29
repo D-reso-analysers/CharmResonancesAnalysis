@@ -9,6 +9,8 @@ import numpy as np
 import yaml
 import ROOT
 
+
+
 def calculate_efficiency(num, den):
     """
 
@@ -27,7 +29,7 @@ def compute_efficiencies(input_config):
     with open(input_config, "r") as f:
         cfg = yaml.safe_load(f)
 
-    if cfg["hadron"] != "dstar":
+    if cfg["hadron"] not in ["dstar", "dplus"]:
         print(f"ERROR: {cfg['hadron']} not supported, exit")
         sys.exit()
 
@@ -121,7 +123,7 @@ def project(input_config):
     with open(input_config, "r") as f:
         cfg = yaml.safe_load(f)
 
-    if cfg["hadron"] != "dstar":
+    if cfg["hadron"] not in ["dstar", "dplus"]:
         print(f"ERROR: {cfg['hadron']} not supported, exit")
         sys.exit()
 
@@ -136,12 +138,11 @@ def project(input_config):
     sparse_gennp = infile.Get("hGenNonPrompt")
     infile.Close()
 
-    bdt_bkg_bin_max = sparse_recop.GetAxis(2).FindBin(cfg["bdt_cuts"]["bkg"]*0.999)
-    sparse_recop.GetAxis(2).SetRange(1, bdt_bkg_bin_max)
-    sparse_reconp.GetAxis(2).SetRange(1, bdt_bkg_bin_max)
-
     pt_mins = cfg["pt_mins"]
     pt_maxs = cfg["pt_maxs"]
+    bdt_bkg_cuts = cfg["bdt_cuts"]["bkg"]
+    if not isinstance(bdt_bkg_cuts, list):
+        bdt_bkg_cuts = [bdt_bkg_cuts]*len(pt_mins)
 
     outfile = ROOT.TFile(os.path.join(outputdir, f"hist_mcpt{suffix}.root"), "recreate")
 
@@ -149,6 +150,9 @@ def project(input_config):
     histos_recpt_p_nocut, histos_recpt_np_nocut = [], []
     histos_genpt_p, histos_genpt_np = [], []
     for ipt, (pt_min, pt_max) in enumerate(zip(pt_mins, pt_maxs)):
+        bdt_bkg_bin_max = sparse_recop.GetAxis(2).FindBin(bdt_bkg_cuts[ipt]*0.999)
+        sparse_recop.GetAxis(2).SetRange(1, bdt_bkg_bin_max)
+        sparse_reconp.GetAxis(2).SetRange(1, bdt_bkg_bin_max)
         pt_bin_min = sparse_genp.GetAxis(0).FindBin(pt_min*1.001)
         pt_bin_max = sparse_genp.GetAxis(0).FindBin(pt_max*0.999)
         sparse_genp.GetAxis(0).SetRange(pt_bin_min, pt_bin_max)

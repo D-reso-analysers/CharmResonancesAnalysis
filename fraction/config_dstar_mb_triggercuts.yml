@@ -2,7 +2,7 @@ hadron: dstar
 
 input:
   data: inputs/sparse_dstar_LHC22_LHC23.root
-  mc: inputs/sparse_dstar_LHC24g5_trackTuner.root
+  mc: inputs/sparse_dstar_LHC24g5_trigger.root
 
 pt_mins: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10., 12., 16.]
 pt_maxs: [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10., 12., 16., 24.]
@@ -27,7 +27,7 @@ fit:
 output:
   rawyields:
     directory: rawyields
-    suffix: _dstar_LHC22_LHC23
+    suffix: _dplus_LHC22_small
   efficiencies:
     directory: efficiencies
-    suffix: _dstar_LHC24g5_trackTuner
+    suffix: _dplus_LHC24g5_trackTuner
