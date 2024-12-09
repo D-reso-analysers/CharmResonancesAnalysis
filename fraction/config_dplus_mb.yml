@@ -2,7 +2,8 @@ hadron: dplus
 
 input:
   data: /home/lagliett/alice/CharmResonancesAnalysis/fraction/inputs/sparse_dplus_full.root
-  mc: /home/lagliett/alice/CharmResonancesAnalysis/fraction/inputs/sparse_dplus_LHC24g5.root
+  mc: [/home/lagliett/alice/CharmResonancesAnalysis/fraction/inputs/sparse_dplus_LHC24g5.root]
+  mc_weights: [1.] # if only one file ignored
 
 pt_mins: [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 8.0, 12., 16.]
 pt_maxs: [1.0, 2.0, 3.0, 4.0, 5.0, 8.0, 12., 16., 24.]
@@ -24,6 +25,9 @@ fit:
   mass_maxs: [1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 2.05, 2.15]
   sgn_funcs: ["gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian"]
   bkg_funcs: ["chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3"]
+
+efficiency:
+  include_pitomu: True
 
 output:
   rawyields:

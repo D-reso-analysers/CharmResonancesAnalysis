@@ -11,7 +11,7 @@ def reduce(infile_name, outfile_name, is_mc):
 
     """
 
-    axes_to_keep = np.array([0, 1, 6, 7], dtype=np.int32)
+    axes_to_keep = np.array([0, 1, 6, 7, 11], dtype=np.int32) # last one for pi->mu decays
 
     infile = ROOT.TFile.Open(infile_name)
     outfile = ROOT.TFile(outfile_name, "recreate")

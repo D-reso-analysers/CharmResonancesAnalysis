@@ -2,13 +2,14 @@ hadron: dstar
 
 input:
   data: inputs/sparse_dstar_LHC22_LHC23.root
-  mc: inputs/sparse_dstar_LHC24g5_trackTuner.root
+  mc: [inputs/sparse_dstar_LHC24g5_trackTuner_ptSmearing1p5.root, inputs/sparse_dstar_LHC24h1_trackTuner_ptSmearing1p5.root]
+  mc_weights: [1., 2.3333] # 1 and 7./3 which approximatelly should reproduce the data 
 
 pt_mins: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10., 12., 16.]
 pt_maxs: [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10., 12., 16., 24.]
 
 bdt_cuts:
-  bkg: 0.06 # same vs pT (for now, can be improved)
+  bkg: [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06]
   nonprompt: [0.20, 0.22, 0.24, 0.26, 0.28,
               0.30, 0.32, 0.34, 0.36, 0.38,
               0.40, 0.42, 0.44, 0.46, 0.48,
@@ -24,10 +25,13 @@ fit:
   sgn_funcs: ["doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb"]
   bkg_funcs: ["expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext"]
 
+efficiency:
+  include_pitomu: True
+
 output:
   rawyields:
     directory: rawyields
     suffix: _dstar_LHC22_LHC23
   efficiencies:
     directory: efficiencies
-    suffix: _dstar_LHC24g5_trackTuner
+    suffix: _dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5 #
