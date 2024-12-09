@@ -127,15 +127,19 @@ def project(input_config):
         print(f"ERROR: {cfg['hadron']} not supported, exit")
         sys.exit()
 
-    infile_name = cfg["input"]["mc"]
+    infile_names = cfg["input"]["mc"]
+    mc_weights = cfg["input"]["mc_weights"]
     outputdir = cfg["output"]["efficiencies"]["directory"]
     suffix = cfg["output"]["efficiencies"]["suffix"]
+    include_pitomu = cfg["efficiency"]["include_pitomu"]
 
-    infile = ROOT.TFile.Open(infile_name)
-    sparse_recop = infile.Get("hRecoPrompt")
-    sparse_reconp = infile.Get("hRecoNonPrompt")
-    sparse_genp = infile.Get("hGenPrompt")
-    sparse_gennp = infile.Get("hGenNonPrompt")
+    sparse_recop, sparse_reconp, sparse_genp, sparse_gennp = ([] for _ in range(4))
+    for infile_name in infile_names:
+        infile = ROOT.TFile.Open(infile_name)
+        sparse_recop.append(infile.Get("hRecoPrompt"))
+        sparse_reconp.append(infile.Get("hRecoNonPrompt"))
+        sparse_genp.append(infile.Get("hGenPrompt"))
+        sparse_gennp.append(infile.Get("hGenNonPrompt"))
     infile.Close()
 
     pt_mins = cfg["pt_mins"]
@@ -150,26 +154,57 @@ def project(input_config):
     histos_recpt_p_nocut, histos_recpt_np_nocut = [], []
     histos_genpt_p, histos_genpt_np = [], []
     for ipt, (pt_min, pt_max) in enumerate(zip(pt_mins, pt_maxs)):
-        bdt_bkg_bin_max = sparse_recop.GetAxis(2).FindBin(bdt_bkg_cuts[ipt]*0.999)
-        sparse_recop.GetAxis(2).SetRange(1, bdt_bkg_bin_max)
-        sparse_reconp.GetAxis(2).SetRange(1, bdt_bkg_bin_max)
-        pt_bin_min = sparse_genp.GetAxis(0).FindBin(pt_min*1.001)
-        pt_bin_max = sparse_genp.GetAxis(0).FindBin(pt_max*0.999)
-        sparse_genp.GetAxis(0).SetRange(pt_bin_min, pt_bin_max)
-        sparse_gennp.GetAxis(0).SetRange(pt_bin_min, pt_bin_max)
-        histos_genpt_p.append(sparse_genp.Projection(0))
-        histos_genpt_np.append(sparse_gennp.Projection(0))
+        # generated
+        pt_bin_min = sparse_genp[0].GetAxis(0).FindBin(pt_min*1.001)
+        pt_bin_max = sparse_genp[0].GetAxis(0).FindBin(pt_max*0.999)
+        # |y|<0.5 by default
+        y_bin_min = sparse_genp[0].GetAxis(2).FindBin(-0.4999)
+        y_bin_max = sparse_genp[0].GetAxis(2).FindBin(0.4999)
+        for ifile, _ in enumerate(infile_names):
+            sparse_genp[ifile].GetAxis(0).SetRange(pt_bin_min, pt_bin_max)
+            sparse_gennp[ifile].GetAxis(0).SetRange(pt_bin_min, pt_bin_max)
+            sparse_genp[ifile].GetAxis(2).SetRange(y_bin_min, y_bin_max)
+            sparse_gennp[ifile].GetAxis(2).SetRange(y_bin_min, y_bin_max)
+            if not include_pitomu: # exlcude pi->mu decays from signal
+                sparse_recop[ifile].GetAxis(4).SetRange(1, 1)
+                sparse_reconp[ifile].GetAxis(4).SetRange(1, 1)
+            if ifile == 0:
+                histos_genpt_p.append(sparse_genp[ifile].Projection(0))
+                histos_genpt_np.append(sparse_gennp[ifile].Projection(0))
+                histos_genpt_p[ipt].Sumw2()
+                histos_genpt_np[ipt].Sumw2()
+                if len(infile_names) > 1:
+                    histos_genpt_p[ipt].Scale(mc_weights[ifile])
+                    histos_genpt_np[ipt].Scale(mc_weights[ifile])
+            else:
+                histos_genpt_p[ipt].Add(sparse_genp[ifile].Projection(0), mc_weights[ifile])
+                histos_genpt_np[ipt].Add(sparse_gennp[ifile].Projection(0), mc_weights[ifile])
         histos_genpt_p[ipt].SetName(f"hist_genpt_p_pt{pt_min:.1f}_{pt_max:.1f}")
         histos_genpt_np[ipt].SetName(f"hist_genpt_np_pt{pt_min:.1f}_{pt_max:.1f}")
         outfile.cd()
         histos_genpt_p[ipt].Write()
         histos_genpt_np[ipt].Write()
-        pt_bin_min = sparse_recop.GetAxis(1).FindBin(pt_min*1.001)
-        pt_bin_max = sparse_recop.GetAxis(1).FindBin(pt_max*0.999)
-        sparse_recop.GetAxis(1).SetRange(pt_bin_min, pt_bin_max)
-        sparse_reconp.GetAxis(1).SetRange(pt_bin_min, pt_bin_max)
-        histos_recpt_p_nocut.append(sparse_recop.Projection(1))
-        histos_recpt_np_nocut.append(sparse_reconp.Projection(1))
+
+        # reco (no np cut)
+        bdt_bkg_bin_max = sparse_recop[0].GetAxis(2).FindBin(bdt_bkg_cuts[ipt]*0.999)
+        pt_bin_min = sparse_recop[0].GetAxis(1).FindBin(pt_min*1.001)
+        pt_bin_max = sparse_recop[0].GetAxis(1).FindBin(pt_max*0.999)
+        for ifile, _ in enumerate(infile_names):
+            sparse_recop[ifile].GetAxis(2).SetRange(1, bdt_bkg_bin_max)
+            sparse_reconp[ifile].GetAxis(2).SetRange(1, bdt_bkg_bin_max)
+            sparse_recop[ifile].GetAxis(1).SetRange(pt_bin_min, pt_bin_max)
+            sparse_reconp[ifile].GetAxis(1).SetRange(pt_bin_min, pt_bin_max)
+            if ifile == 0:
+                histos_recpt_p_nocut.append(sparse_recop[ifile].Projection(1))
+                histos_recpt_np_nocut.append(sparse_reconp[ifile].Projection(1))
+                histos_recpt_p_nocut[ipt].Sumw2()
+                histos_recpt_np_nocut[ipt].Sumw2()
+                if len(infile_names) > 1:
+                    histos_recpt_p_nocut[ipt].Scale(mc_weights[ifile])
+                    histos_recpt_np_nocut[ipt].Scale(mc_weights[ifile])
+            else:
+                histos_recpt_p_nocut[ipt].Add(sparse_recop[ifile].Projection(1), mc_weights[ifile])
+                histos_recpt_np_nocut[ipt].Add(sparse_reconp[ifile].Projection(1), mc_weights[ifile])
         histos_recpt_p_nocut[ipt].SetName(
             f"hist_recopt_p_pt{pt_min:.1f}_{pt_max:.1f}_nocutnp")
         histos_recpt_np_nocut[ipt].SetName(
@@ -177,23 +212,36 @@ def project(input_config):
         outfile.cd()
         histos_recpt_p_nocut[ipt].Write()
         histos_recpt_np_nocut[ipt].Write()
+
+        # reco (np cuts)
         histos_recpt_p.append([])
         histos_recpt_np.append([])
-        for bdt_np_min in cfg["bdt_cuts"]["nonprompt"]:
-            bdt_np_bin_min = sparse_recop.GetAxis(3).FindBin(bdt_np_min*1.001)
-            sparse_recop.GetAxis(3).SetRange(bdt_np_bin_min, sparse_recop.GetAxis(3).GetNbins()+1)
-            sparse_reconp.GetAxis(3).SetRange(bdt_np_bin_min, sparse_reconp.GetAxis(3).GetNbins()+1)
-            histos_recpt_p[ipt].append(sparse_recop.Projection(1))
-            histos_recpt_np[ipt].append(sparse_reconp.Projection(1))
-            histos_recpt_p[ipt][-1].SetName(
+        for icut, bdt_np_min in enumerate(cfg["bdt_cuts"]["nonprompt"]):
+            bdt_np_bin_min = sparse_recop[0].GetAxis(3).FindBin(bdt_np_min*1.001)
+            for ifile, _ in enumerate(infile_names):
+                sparse_recop[ifile].GetAxis(3).SetRange(bdt_np_bin_min, sparse_recop[0].GetAxis(3).GetNbins()+1)
+                sparse_reconp[ifile].GetAxis(3).SetRange(bdt_np_bin_min, sparse_reconp[0].GetAxis(3).GetNbins()+1)
+                if ifile == 0:
+                    histos_recpt_p[ipt].append(sparse_recop[ifile].Projection(1))
+                    histos_recpt_np[ipt].append(sparse_reconp[ifile].Projection(1))
+                    histos_recpt_p[ipt][icut].Sumw2()
+                    histos_recpt_np[ipt][icut].Sumw2()
+                    if len(infile_names) > 1:
+                        histos_recpt_p[ipt][icut].Scale(mc_weights[ifile])
+                        histos_recpt_np[ipt][icut].Scale(mc_weights[ifile])
+                else:
+                    histos_recpt_p[ipt][icut].Add(sparse_recop[ifile].Projection(1), mc_weights[ifile])
+                    histos_recpt_np[ipt][icut].Add(sparse_reconp[ifile].Projection(1), mc_weights[ifile])
+            histos_recpt_p[ipt][icut].SetName(
                 f"hist_recopt_p_pt{pt_min:.1f}_{pt_max:.1f}_bdtnp{bdt_np_min:.2f}")
-            histos_recpt_np[ipt][-1].SetName(
+            histos_recpt_np[ipt][icut].SetName(
                 f"hist_recopt_np_pt{pt_min:.1f}_{pt_max:.1f}_bdtnp{bdt_np_min:.2f}")
             outfile.cd()
-            histos_recpt_p[ipt][-1].Write()
-            histos_recpt_np[ipt][-1].Write()
-            sparse_recop.GetAxis(3).SetRange(-1, -1)
-            sparse_reconp.GetAxis(3).SetRange(-1, -1)
+            histos_recpt_p[ipt][icut].Write()
+            histos_recpt_np[ipt][icut].Write()
+            for ifile, _ in enumerate(infile_names):
+                sparse_recop[ifile].GetAxis(3).SetRange(-1, -1)
+                sparse_reconp[ifile].GetAxis(3).SetRange(-1, -1)
     outfile.Close()
 
 
