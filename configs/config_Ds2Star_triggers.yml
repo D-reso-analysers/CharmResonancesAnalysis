@@ -1,0 +1,68 @@
+# -----inputs for raw yields --------------------------
+fileNameData: /home/lagliett/alice/CharmResonancesAnalysis/data/AO2D_Ds2Star_Trg.root # Task output not there
+treeNameData: O2hfcandresolite
+outputRawYield: /home/lagliett/alice/CharmResonancesAnalysis/raw_yield/output/rawYieldDs2Star_TRG.root
+filteredDf: filteredTreeTaskDs2Star_TRG.parquet
+plotLabel: invMass_Ds2Star_TRG
+# -----inputs for efficiencies ------------------------
+fileNameMC : /home/lagliett/alice/CharmResonancesAnalysis/data/TreeTask_DplusV0_TRGcuts_LHC24g6_train302309.root
+# fileNameMC : /home/lagliett/alice/CharmResonancesAnalysis/data/TreeTask_Ds2Star_TRGcuts_LHC24g6.root
+treeNameRec: O2hfcandresolite
+treeNameGen: O2hfgenresolite
+outputEff: /home/lagliett/alice/CharmResonancesAnalysis/efficiency/efficiency_Ds2Star_LHC24g6_TRG.root
+# -----particle pdgcode: Ds1:10433, Ds2*:435 -----------
+pdgId: 435
+# -----Cuts, same for efficiencies and yields-----------
+cutVars: 
+  pt:
+    min:  [ 2.0, 4.0, 6.0, 8.0, 12., 5] 
+    max:  [ 4.0, 6.0, 8.0, 12., 24., 24]
+    varname: 'fPt'
+    useBachPt: false
+  ptBach0:
+    min:  [1.0, 2.0, 3.0, 5.0, 8.0, 12., 16.] 
+    max:  [2.0, 3.0, 5.0, 8.0, 12., 16., 24.]
+    varname: 'fPtBach0'
+    useBachPt: false
+  invMass:
+    min: [ 0.49, 0.49, 0.49, 0.49, 0.49, 0.49]
+    max: [ 0.89, 0.89, 0.89, 0.89, 0.89, 0.89]
+    varname: 'fM'
+    useBachPt: false
+  bkgBdtScore:
+    min:  [ ~, ~, ~, ~, ~, ~, ~, ~, ~] 
+    max:  [ 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]
+    varname: 'fMlScoreBkgBach0'
+    useBachPt: true
+  invMassProng0:
+    min:  [1.80, 1.80, 1.80, 1.80, 1.80, 1.80, 1.80] 
+    max:  [1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92]
+    varname: 'fMBach0'
+    useBachPt: true
+    parametrized: true
+    params: 
+      deltaMassConst: -0.00245
+      deltaMassLinear: 0.0001
+      sigmaConst: 0.00796
+      sigmaLinear: 0.00176
+      nSigma: 2
+      ptMaxDelta: 10 
+  invMassProng1:
+    min:  [ 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882] 
+    max:  [ 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050]
+    varname: 'fMBach1'
+    useBachPt: false
+# -----Invariant mass signal extraction configs-----------
+fit:
+  mass_mins: [ 0.60, 0.60, 0.60, 0.60, 0.60, 0.60]
+  mass_maxs: [ 0.80, 0.80, 0.80, 0.80, 0.80, 0.80]
+  sgn_funcs: [ "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian"]
+  bkg_funcs: [ "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext"]
+plot:
+  mass_mins: [0.60, 0.60, 0.60, 0.60, 0.60, 0.60]
+  mass_maxs: [0.80, 0.80, 0.80, 0.80, 0.80, 0.80]
+  nbins: [100, 100, 100, 100, 100, 100]
+# -----Efficiency configs---------------------------------
+acceptFlags: [2, 7]
+
+

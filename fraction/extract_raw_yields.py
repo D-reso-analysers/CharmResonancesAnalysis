@@ -271,6 +271,7 @@ def project(input_config):
 
     histos_pt, histos_pt_cutvar = [], []
     for ipt, (pt_min, pt_max) in enumerate(zip(pt_mins, pt_maxs)):
+        print(f'projecting in pt range {pt_min, pt_max}')
         bdt_bkg_bin_max = sparse.GetAxis(2).FindBin(bdt_bkg_cuts[ipt]*0.999)
         sparse.GetAxis(2).SetRange(1, bdt_bkg_bin_max)
         pt_bin_min = sparse.GetAxis(1).FindBin(pt_min*1.001)

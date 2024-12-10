@@ -153,18 +153,19 @@ def project(input_config):
     histos_recpt_p, histos_recpt_np = [], []
     histos_recpt_p_nocut, histos_recpt_np_nocut = [], []
     histos_genpt_p, histos_genpt_np = [], []
+    axis_y_gen = 2 if cfg["hadron"] == "dstar" else 1
     for ipt, (pt_min, pt_max) in enumerate(zip(pt_mins, pt_maxs)):
         # generated
         pt_bin_min = sparse_genp[0].GetAxis(0).FindBin(pt_min*1.001)
         pt_bin_max = sparse_genp[0].GetAxis(0).FindBin(pt_max*0.999)
         # |y|<0.5 by default
-        y_bin_min = sparse_genp[0].GetAxis(2).FindBin(-0.4999)
-        y_bin_max = sparse_genp[0].GetAxis(2).FindBin(0.4999)
+        y_bin_min = sparse_genp[0].GetAxis(axis_y_gen).FindBin(-0.4999)
+        y_bin_max = sparse_genp[0].GetAxis(axis_y_gen).FindBin(0.4999)
         for ifile, _ in enumerate(infile_names):
             sparse_genp[ifile].GetAxis(0).SetRange(pt_bin_min, pt_bin_max)
             sparse_gennp[ifile].GetAxis(0).SetRange(pt_bin_min, pt_bin_max)
-            sparse_genp[ifile].GetAxis(2).SetRange(y_bin_min, y_bin_max)
-            sparse_gennp[ifile].GetAxis(2).SetRange(y_bin_min, y_bin_max)
+            sparse_genp[ifile].GetAxis(axis_y_gen).SetRange(y_bin_min, y_bin_max)
+            sparse_gennp[ifile].GetAxis(axis_y_gen).SetRange(y_bin_min, y_bin_max)
             if not include_pitomu: # exlcude pi->mu decays from signal
                 sparse_recop[ifile].GetAxis(4).SetRange(1, 1)
                 sparse_reconp[ifile].GetAxis(4).SetRange(1, 1)
