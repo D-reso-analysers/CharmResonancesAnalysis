@@ -1,2 +1,0 @@
-/home/lagliett/alice/CharmResonancesAnalysis/fraction/inputs/sparse_dplus_LHC22_full.root
-/home/lagliett/alice/CharmResonancesAnalysis/fraction/inputs/sparse_dplus_LHC23_full.root

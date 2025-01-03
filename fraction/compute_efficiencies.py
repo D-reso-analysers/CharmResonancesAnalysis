@@ -10,7 +10,6 @@ import yaml
 import ROOT
 
 
-
 def calculate_efficiency(num, den):
     """
 
@@ -20,6 +19,7 @@ def calculate_efficiency(num, den):
     unc = np.sqrt(eff * (1 - eff) / den)
 
     return eff, unc
+
 
 def compute_efficiencies(input_config):
     """
