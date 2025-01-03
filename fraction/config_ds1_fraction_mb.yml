@@ -1,0 +1,24 @@
+hadron: ds1
+
+ptbins:
+  mins: [2., 3., 4., 5., 6., 8., 12.]
+  maxs: [3., 4., 5., 6., 8., 12., 24.]
+
+# binning of daughter!
+rel_sys_unc: [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
+
+# as from Run 2
+scale_factor:
+  value: 1.93
+  uncertainty: 0.37
+
+inputs:
+  kinematics: kinematics/kine_ds1_pythia8_monash.root
+  cutvariation: cutvariation/cutvar_dstar_pp13dot6tev_MB.root
+  efficiencies:
+    file: efficiencies/efficiencies_nocutnp_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis.root
+    histonames:
+      prompt: hist_eff_prompt
+      nonprompt: hist_eff_nonprompt
+
+output: fractions/fraction_ds1_pp13dot6tev_MB.root

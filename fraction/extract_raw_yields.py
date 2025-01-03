@@ -147,7 +147,7 @@ def fit(input_config):
         fitter.append(
             perform_fit(infile_name,
                         f"hist_mass_pt{pt_min:.1f}_{pt_max:.1f}_nocutnp",
-                        f"{cfg["hadron"]}_pt{pt_min:.1f}_{pt_max:.1f}_nocutnp",
+                        f"{cfg['hadron']}_pt{pt_min:.1f}_{pt_max:.1f}_nocutnp",
                         sgn_funcs[ipt],
                         bkg_funcs[ipt],
                         mass_mins[ipt],
@@ -189,8 +189,12 @@ def fit(input_config):
             fitter[ipt].dump_to_root(outfile_name_nocut,
                                      option="update",
                                      suffix=f"_pt{pt_min:.1f}_{pt_max:.1f}_nocutnp")
-
-            fig = fitter[ipt].plot_mass_fit(style="ATLAS", figsize=(8, 8))
+            xaxis = ""
+            if cfg["hadron"] == "dstar":
+                xaxis = r"$M(\mathrm{K}\pi\pi) - M(\mathrm{K}\pi)$ (GeV/$c^{2}$)"
+            elif cfg["hadron"] == "dplus":
+                xaxis = r"$M(\mathrm{K}\pi\pi)$ (GeV/$c^{2}$)"
+            fig = fitter[ipt].plot_mass_fit(style="ATLAS", figsize=(8, 8), axis_title=xaxis)
             figres = fitter[ipt].plot_raw_residuals(figsize=(8, 8), style="ATLAS")
 
             fig[0].savefig(
@@ -205,7 +209,7 @@ def fit(input_config):
             fitter_pt_cutvar.append(
                 perform_fit(infile_name,
                             f"hist_mass_pt{pt_min:.1f}_{pt_max:.1f}_bdtnp{bdt_np_min:.2f}",
-                            f"{cfg["hadron"]}_pt{pt_min:.1f}_{pt_max:.1f}_bdtnp{bdt_np_min:.2f}",
+                            f"{cfg['hadron']}_pt{pt_min:.1f}_{pt_max:.1f}_bdtnp{bdt_np_min:.2f}",
                             sgn_funcs[ipt],
                             bkg_funcs[ipt],
                             mass_mins[ipt],
@@ -217,7 +221,8 @@ def fit(input_config):
             if fitter_pt_cutvar[icut].get_fit_result.converged:
                 bin_counting_min = 0.14 if cfg["hadron"] == "dstar" else 1.70
                 bin_counting_max = 0.16 if cfg["hadron"] == "dstar" else 2.00
-                rawyield = fitter_pt_cutvar[icut].get_raw_yield_bincounting(0, min=bin_counting_min, max=bin_counting_max)
+                rawyield = fitter_pt_cutvar[icut].get_raw_yield_bincounting(
+                    0, min=bin_counting_min, max=bin_counting_max)
                 hist_rawyield_cutvar[icut].SetBinContent(ipt+1, rawyield[0])
                 hist_rawyield_cutvar[icut].SetBinError(ipt+1, rawyield[1])
 
