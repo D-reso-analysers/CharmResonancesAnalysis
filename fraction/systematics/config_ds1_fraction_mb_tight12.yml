@@ -1,0 +1,43 @@
+hadron: ds1
+inputs:
+  cutvariation: cutvariation/cutvar_dstar_pp13dot6tev_MB_worseDca1p1.root
+  efficiencies:
+    file: systematics/efficiencies_nocutnp_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_worseDca1p1_BDTAnalysis_tight12.root
+    histonames:
+      nonprompt: hist_eff_nonprompt
+      prompt: hist_eff_prompt
+  kinematics: kinematics/kine_ds1_pythia8_monash.root
+output: systematics/fraction_ds1_pp13dot6tev_MB_worseDca1p1_tight12.root
+ptbins:
+  maxs:
+  - 3.0
+  - 4.0
+  - 5.0
+  - 6.0
+  - 8.0
+  - 12.0
+  - 24.0
+  mins:
+  - 2.0
+  - 3.0
+  - 4.0
+  - 5.0
+  - 6.0
+  - 8.0
+  - 12.0
+rel_sys_unc:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+scale_factor:
+  uncertainty: 0.37
+  value: 1.93

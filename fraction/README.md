@@ -14,3 +14,6 @@
 
 ## Kinematics file
 - File with kinematics to convert transverse momentum of D-meson daughter in the one of the resonance mother: [https://cernbox.cern.ch/s/a8s4wDSD1NWMoT4](https://cernbox.cern.ch/s/a8s4wDSD1NWMoT4)
+
+## Systematics
+- Directory with variations of selections for systematic uncertainty of selection efficiency: [https://cernbox.cern.ch/s/BgjYHSK8Oxmtiqy](https://cernbox.cern.ch/s/BgjYHSK8Oxmtiqy) 

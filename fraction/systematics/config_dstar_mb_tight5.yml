@@ -1,0 +1,112 @@
+bdt_cuts:
+  bkg:
+  - 0.01
+  - 0.014
+  - 0.05500000000000001
+  - 0.05500000000000001
+  - 0.08
+  - 0.08
+  - 0.08
+  - 0.24
+  - 0.24
+  - 0.24
+  - 0.25
+  - 0.18
+  nonprompt: []
+efficiency:
+  include_pitomu: true
+fit:
+  bkg_funcs:
+  - expopowext
+  - expopowext
+  - expopowext
+  - expopowext
+  - expopowext
+  - expopowext
+  - expopowext
+  - expopowext
+  - expopowext
+  - expopowext
+  - expopowext
+  - expopowext
+  mass_maxs:
+  - 0.16
+  - 0.165
+  - 0.17
+  - 0.17
+  - 0.17
+  - 0.17
+  - 0.17
+  - 0.17
+  - 0.17
+  - 0.17
+  - 0.17
+  - 0.17
+  mass_mins:
+  - 0.1396
+  - 0.1396
+  - 0.1396
+  - 0.1396
+  - 0.1396
+  - 0.1396
+  - 0.1396
+  - 0.1396
+  - 0.1396
+  - 0.1396
+  - 0.1396
+  - 0.1396
+  sgn_funcs:
+  - doublecb
+  - doublecb
+  - doublecb
+  - doublecb
+  - doublecb
+  - doublecb
+  - doublecb
+  - doublecb
+  - doublecb
+  - doublecb
+  - doublecb
+  - doublecb
+hadron: dstar
+input:
+  data: inputs/sparse_dstar_LHC22_LHC23_BDTAnalysis.root
+  mc:
+  - inputs/sparse_dstar_LHC24g5_trackTuner_ptSmearing1p5_worseDca1p1_BDTAnalysis.root
+  - inputs/sparse_dstar_LHC24h1_trackTuner_ptSmearing1p5_worseDca1p1_BDTAnalysis.root
+  mc_weights:
+  - 1.0
+  - 2.3333
+output:
+  efficiencies:
+    directory: systematics
+    suffix: _dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_worseDca1p1_BDTAnalysis_tight5
+  rawyields:
+    directory: rawyields
+    suffix: _dstar_LHC22_LHC23_BDTAnalysis
+pt_maxs:
+- 2.0
+- 3.0
+- 4.0
+- 5.0
+- 6.0
+- 7.0
+- 8.0
+- 9.0
+- 10.0
+- 12.0
+- 16.0
+- 24.0
+pt_mins:
+- 1.0
+- 2.0
+- 3.0
+- 4.0
+- 5.0
+- 6.0
+- 7.0
+- 8.0
+- 9.0
+- 10.0
+- 12.0
+- 16.0

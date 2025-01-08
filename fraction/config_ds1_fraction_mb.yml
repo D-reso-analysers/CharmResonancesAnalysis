@@ -14,11 +14,11 @@ scale_factor:
 
 inputs:
   kinematics: kinematics/kine_ds1_pythia8_monash.root
-  cutvariation: cutvariation/cutvar_dstar_pp13dot6tev_MB.root
+  cutvariation: cutvariation/cutvar_dstar_pp13dot6tev_MB_worseDca1p1.root
   efficiencies:
-    file: efficiencies/efficiencies_nocutnp_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis.root
+    file: efficiencies/efficiencies_nocutnp_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_worseDca1p1_BDTAnalysis.root
     histonames:
       prompt: hist_eff_prompt
       nonprompt: hist_eff_nonprompt
 
-output: fractions/fraction_ds1_pp13dot6tev_MB.root
+output: fractions/fraction_ds1_pp13dot6tev_MB_worseDca1p1.root
