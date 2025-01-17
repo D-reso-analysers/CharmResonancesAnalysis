@@ -5,7 +5,7 @@ ptbins:
   maxs: [3., 4., 5., 6., 8., 12., 24.]
 
 # binning of daughter!
-rel_sys_unc: [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.]
+rel_sys_unc: [0.01, 0.01, 0.01, 0.02, 0.02, 0.02, 0.03, 0.03, 0.03, 0.04, 0.04, 0.04]
 
 # as from Run 2
 scale_factor:
