@@ -135,8 +135,8 @@ def compute_fraction(config):
     graph_frac_prompt_reso_sysscale = ROOT.TGraphAsymmErrors(1)
     graph_frac_prompt_reso_systot = ROOT.TGraphAsymmErrors(1)
     graph_frac_prompt_reso_sys.SetName("graph_frac_prompt_reso_sys")
-    graph_frac_prompt_reso_sysscale.SetName("graph_frac_prompt_reso_sys")
-    graph_frac_prompt_reso_systot.SetName("graph_frac_prompt_reso_sys")
+    graph_frac_prompt_reso_sysscale.SetName("graph_frac_prompt_reso_sysscale")
+    graph_frac_prompt_reso_systot.SetName("graph_frac_prompt_reso_systot")
     for ipt in range(1, hist_frac_prompt_reso.GetNbinsX() + 1):
         htmp = hist_frac_prompt_reso_vs_pt["cent"].ProjectionY(f"htmp_{ipt}", ipt, ipt)
         htmp_statmin = hist_frac_prompt_reso_vs_pt["statmin"].ProjectionY(f"htmp_statmin_{ipt}", ipt, ipt)
