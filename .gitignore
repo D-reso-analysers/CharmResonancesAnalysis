@@ -1,4 +1,7 @@
 *.root
 *.DS_Store
 *.pdf
+*.png
+*.parquet
+Scripts
 __pycache__

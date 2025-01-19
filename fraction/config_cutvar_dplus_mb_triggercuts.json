@@ -1,0 +1,75 @@
+{
+    "rawyields": {
+        "inputdir": "rawyields",
+        "inputfiles": [
+            "rawyields_bdtnp0.58_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.60_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.62_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.64_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.66_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.68_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.70_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.72_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.74_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.76_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.78_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.80_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.82_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.84_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.86_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.88_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.90_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.92_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.94_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.96_dplus_LHC22_LHC23_trigger.root",
+            "rawyields_bdtnp0.98_dplus_LHC22_LHC23_trigger.root"
+        ],
+        "histoname": "hist_rawyield"
+    },
+    "efficiencies": {
+        "inputdir": "efficiencies",
+        "inputfiles": [
+            "efficiencies_bdtnp0.58_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.60_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.62_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.64_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.66_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.68_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.70_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.72_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.74_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.76_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.78_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.80_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.82_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.84_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.86_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.88_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.90_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.92_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.94_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.96_dplus_LHC24g5_LHC24h1_trigger.root",
+            "efficiencies_bdtnp0.98_dplus_LHC24g5_LHC24h1_trigger.root"
+        ],
+        "histonames": {
+            "prompt": "hist_eff_prompt",
+            "nonprompt": "hist_eff_nonprompt"
+        }
+    },
+    "minimisation": {
+        "correlated": true
+    },
+    "central_efficiency": {
+        "computerawfrac": true,
+        "inputdir": "efficiencies",
+        "inputfile": "efficiencies_nocutnp_dplus_LHC24g5_LHC24h1_trigger.root",
+        "histonames": {
+            "prompt": "hist_eff_prompt",
+            "nonprompt": "hist_eff_nonprompt"
+        }
+    },
+    "output": {
+        "directory": "cutvariation",
+        "file": "cutvar_dplus_pp13dot6tev_trigger.root"
+    }
+}

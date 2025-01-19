@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 from utils.analysis_utils import loadAO2D, applySelections
 
-def computeEfficiency(dfRec, dfGen, cfg):
+def computeEfficiency(dfRecList, dfGenList, cfg, weights):
     def eff(nRec, nGen):
         return nRec / nGen
     def effErr(nRec, nGen):
@@ -17,12 +17,17 @@ def computeEfficiency(dfRec, dfGen, cfg):
     originLabel = 'fOrigin'
     effPrompt , effErrPrompt, effNonPrompt, effErrNonPrompt = [], [], [], []
     for iPt, (ptMin, ptMax) in enumerate(zip(cutVars['pt']['min'], cutVars['pt']['max'])):
-        dfRecCut = dfRec[(dfRec[f"{ptLabel}"] >= ptMin) & (dfRec[f"{ptLabel}"] < ptMax)]
-        dfGenCut = dfGen[(dfGen[f"{ptLabel}"] >= ptMin) & (dfGen[f"{ptLabel}"] < ptMax)]
-        nRecPrompt = len(dfRecCut[dfRecCut[f"{originLabel}"] == 1])
-        nRecNonPrompt = len(dfRecCut[dfRecCut[f"{originLabel}"] == 2])
-        nGenPrompt = len(dfGenCut[dfGenCut[f"{originLabel}"] == 1])
-        nGenNonPrompt = len(dfGenCut[dfGenCut[f"{originLabel}"] == 2])
+        nRecPrompt = 0
+        nRecNonPrompt = 0
+        nGenPrompt = 0
+        nGenNonPrompt = 0
+        for dfRec, dfGen, w in zip(dfRecList, dfGenList, weights):
+            dfRecCut = dfRec[(dfRec[f"{ptLabel}"] >= ptMin) & (dfRec[f"{ptLabel}"] < ptMax)]
+            dfGenCut = dfGen[(dfGen[f"{ptLabel}"] >= ptMin) & (dfGen[f"{ptLabel}"] < ptMax)]
+            nRecPrompt += w * len(dfRecCut[dfRecCut[f"{originLabel}"] == 1])
+            nRecNonPrompt += w * len(dfRecCut[dfRecCut[f"{originLabel}"] == 2])
+            nGenPrompt += w * len(dfGenCut[dfGenCut[f"{originLabel}"] == 1])
+            nGenNonPrompt += w * len(dfGenCut[dfGenCut[f"{originLabel}"] == 2])
         effPrompt.append(eff(nRecPrompt, nGenPrompt))
         effErrPrompt.append(effErr(nRecPrompt, nGenPrompt))
         effNonPrompt.append(eff(nRecNonPrompt, nGenNonPrompt))
@@ -53,14 +58,21 @@ if __name__ == "__main__":
     with open(args.configfile, 'r') as ymlCfgFile:
         cfg = yaml.load(ymlCfgFile, yaml.FullLoader)
     inFileNames = cfg['fileNameMC']
+    if not isinstance(inFileNames, list):
+        inFileNames = [inFileNames]
     inTreeNameRec = cfg['treeNameRec']
     inTreeNameGen = cfg['treeNameGen']
-    # Load trees and apply cuts on Reconstructed candidates
-    dfRec = loadAO2D(inFileNames, inTreeNameRec)
-    dfRecFiltered = applySelections(dfRec, cfg, isMC=True)
-    dfGen = loadAO2D (inFileNames, inTreeNameGen)
+    weights = cfg['mcWeights']
+    dfRecList = []
+    dfGenList = []
+    for fileName in inFileNames:
+        dfRec = loadAO2D(fileName, inTreeNameRec)
+        dfRecFiltered = applySelections(dfRec, cfg, isMC=True)
+        dfGen = loadAO2D(fileName, inTreeNameGen)
+        dfRecList.append(dfRecFiltered)
+        dfGenList.append(dfGen)
     # Compute efficiencies
-    effPrompt , effErrPrompt, effNonPrompt, effErrNonPrompt = computeEfficiency(dfRecFiltered, dfGen, cfg)
+    effPrompt, effErrPrompt, effNonPrompt, effErrNonPrompt = computeEfficiency(dfRecList, dfGenList, cfg, weights)
     # Make histograms 
     hEffPrompt = fillHisto(effPrompt, effErrPrompt, cfg)
     hEffNonPrompt = fillHisto(effNonPrompt, effErrNonPrompt, cfg)

@@ -1,36 +1,39 @@
 # -----inputs for raw yields --------------------------
 fileNameData: /data/lagliett/HF_data/AO2D_TaskDs1MB_train307666.root
 treeNameData: O2hfcandresolite
-outputRawYield: /home/lagliett/alice/CharmResonancesAnalysis/raw_yield/output/rawYieldDs1_MB.root
+outputRawYield: raw_yield/rawYieldDs1_MB_central.root
 filteredDf: filteredTreeTaskDs1_MB.parquet
-plotLabel: invMass_Ds1_MB
+plotLabel: invMass_Ds1_MB_central
 # -----inputs for efficiencies ------------------------
-fileNameMC : /home/lagliett/alice/CharmResonanceAnalysis/data/TreeTaskDs1LHC24g6.root
+fileNameMC : [/home/lagliett/alice/CharmResonancesAnalysis/data/TreeTask_Ds1_MBcuts_LHC24g6_train303734.root, /home/lagliett/alice/CharmResonancesAnalysis/data/TreeTask_Ds1_MBcuts_LHC24h2_train302431.root]
+mcWeights: [1, 7]
 treeNameRec: O2hfcandresolite
 treeNameGen: O2hfgenresolite
-outputEff: /home/lagliett/alice/CharmResonancesAnalysis/efficiency/efficiency_Ds1_LHC24g6_TRG.root
+outputEff: efficiency/efficiency_Ds1_combined_MB_central.root
 # -----particle pdgcode: Ds1:10433, Ds2*:435 -----------
 pdgId: 10433
 # -----Cuts, same for efficiencies and yields-----------
 cutVars: 
   pt:
-    min:  [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 10., 12., 2.] 
-    max:  [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 10., 12., 24., 24.]
+    min:  [2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 12.] 
+    max:  [3.0, 4.0, 5.0, 6.0, 8.0, 12., 24.]
     varname: 'fPt'
     useBachPt: false
   ptBach0:
     min:  [1.0, 2.0, 3.0, 5.0, 8.0, 12., 16.] 
-    max:  [2.0, 3.0, 5.0, 8.0, 12., 16., 24.]
+    max:  [2.0, 3.0, 5.0, 8.0, 12., 16., 100.]
     varname: 'fPtBach0'
     useBachPt: false
   invMass:
-    min: [ 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49]
-    max: [ 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89]
+    min: [ 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49]
+    max: [ 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89]
     varname: 'fM'
     useBachPt: false
   bkgBdtScore:
-    min:  [ ~, ~, ~, ~, ~, ~, ~] 
-    max:  [ 0.03, 0.08, 0.3, 0.7, 0.8, 0.9, 0.6,]
+    min:  [ ~, ~, ~, ~, ~, ~, ~]
+    # max:  [0.002, 0.006, 0.015, 0.04, 0.08, 0.09, 0.10] # tightest cuts. Minimum step is 0.001 
+    max:  [0.016, 0.020, 0.085, 0.11, 0.36, 0.37, 0.24] # central cuts. Minimum step is 0.001
+    # max:  [0.030, 0.076, 0.295, 0.67, 0.78, 0.86, 0.59] # loose cuts: limits from wagon. Minimum step is 0.001
     varname: 'fMlScoreBkgBach0'
     useBachPt: true
   invMassProng0:
@@ -40,21 +43,34 @@ cutVars:
     useBachPt: true
     parametrized: false
   invMassProng1:
-    min:  [ 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882] 
-    max:  [ 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050]
+    min:  [ 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882] 
+    max:  [ 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050]
     varname: 'fMBach1'
     useBachPt: false
 # -----Invariant mass signal extraction configs-----------
 fit:
-  mass_mins: [ 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50]
-  mass_maxs: [ 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60]
-  sgn_funcs: [ "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian"]
-  bkg_funcs: [ "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext"]
+  mass_mins: [ 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50]
+  mass_maxs: [ 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60]
+  signal_pdf: "voigtian"
+  bkg_pdf: "thr3"
+  parameters:
+  - name: "gamma"
+    value: "-600"
+    min: "-1000"
+    max: "1000"
+  - name: "beta"
+    value: "200"
+    min: "0"
+    max: "600"
+  - name: "alpha"
+    value: "50"
+    min: "10"
+    max: "100"
 plot:
-  mass_mins: [0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50]
-  mass_maxs: [0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60]
-  nbins: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+  mass_mins: [ 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50]
+  mass_maxs: [ 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60]
+  nbins: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
 # -----Efficiency configs---------------------------------
-acceptFlags: [1, 4, 6]
+acceptFlags: [1,  6]
 
 

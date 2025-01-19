@@ -1,12 +1,12 @@
 hadron: dplus
 
 input:
-  data: inputs/sparse_dplus_LHC23_trigger.root
-  mc: [inputs/sparse_dplus_LHC24h1_trigger.root]
+  data: inputs/sparse_dplus_LHC22_LHC23_trigger.root
+  mc: [inputs/sparse_dplus_LHC24g5_trigger.root]
   mc_weights: [1.]
 
-pt_mins: [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 8.0, 12., 16.]
-pt_maxs: [1.0, 2.0, 3.0, 4.0, 5.0, 8.0, 12., 16., 24.]
+pt_mins: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10., 12., 16.]
+pt_maxs: [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10., 12., 16., 24.]
 
 bdt_cuts:
   bkg: 0.04
@@ -21,18 +21,18 @@ bdt_cuts:
               0.90, 0.92, 0.94, 0.96, 0.98] # values for cut-variation method (pT differential?)
 
 fit:
-  mass_mins: [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.70, 1.67]
-  mass_maxs: [1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 2.05, 2.15]
-  sgn_funcs: ["gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian"]
-  bkg_funcs: ["chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3"]
+  mass_mins: [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.70, 1.67]
+  mass_maxs: [1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 2.05, 2.15]
+  sgn_funcs: ["gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian"]
+  bkg_funcs: ["chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3"]
 
 output:
   rawyields:
     directory: rawyields
-    suffix: _dplus_LHC23_trigger
+    suffix: _dplus_LHC22_LHC23_trigger
   efficiencies:
     directory: efficiencies
-    suffix: _dplus_LHC24h1_trigger
+    suffix: _dplus_LHC24g5_trigger
 
 efficiency:
   include_pitomu: True
