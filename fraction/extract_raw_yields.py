@@ -38,7 +38,7 @@ def perform_fit(file_name, histo_name, fitter_name, sgn_func, bkg_func, mass_min
     """
 
     """
-    data_hdl = DataHandler(file_name, histoname=histo_name, limits=[mass_min, mass_max])
+    data_hdl = DataHandler(file_name, varname = r"Inv Mass (GeV/c^2)", histoname=histo_name, limits=[mass_min, mass_max])
     fitter = F2MassFitter(data_hdl,
                               name_signal_pdf=[sgn_func],
                               name_background_pdf=[bkg_func],
@@ -73,7 +73,7 @@ def perform_fit(file_name, histo_name, fitter_name, sgn_func, bkg_func, mass_min
     return fitter
 
 # function to perform fits
-def fit(input_config):
+def fit(input_config, fix_mean, plot_npcut):
     """
     Method for fitting
     """
@@ -162,6 +162,8 @@ def fit(input_config):
             sigma = fitter[ipt].get_signal_parameter(0, "sigma")
             mean = fitter[ipt].get_mass(0)
             pars_tofix["sigma"] = sigma[0]
+            if fix_mean:
+                pars_tofix["mean"] = mean[0]
             hist_rawyield_nocut.SetBinContent(ipt+1, rawyield[0])
             hist_rawyield_nocut.SetBinError(ipt+1, rawyield[1])
             hist_sigma_nocut.SetBinContent(ipt+1, sigma[0])
@@ -225,6 +227,12 @@ def fit(input_config):
                     0, min=bin_counting_min, max=bin_counting_max)
                 hist_rawyield_cutvar[icut].SetBinContent(ipt+1, rawyield[0])
                 hist_rawyield_cutvar[icut].SetBinError(ipt+1, rawyield[1])
+                if plot_npcut:
+                    fig = fitter_pt_cutvar[icut].plot_mass_fit(style="ATLAS", figsize=(8, 8), axis_title=r"Inv Mass (GeV/c^2)", show_extra_info = True)
+                    fig[0].savefig(
+                        os.path.join(outputdir, "plots_npcut", f"massfit{suffix}_pt{pt_min:.1f}_{pt_max:.1f}_cutnp_{bdt_np_mins[icut]}.pdf")
+                    )
+                    
 
     for icut, bdt_np_min in enumerate(bdt_np_mins):
         outfile_name_cutvar = os.path.join(
@@ -306,10 +314,14 @@ if __name__ == "__main__":
                         default=False, help="enable projection")
     parser.add_argument("--fit", "-f", action="store_true",
                         default=False, help="enable fit w/o cut")
+    parser.add_argument("--fix_mean", "-fm", action="store_true",
+                        default=False, help="fix gaussian mean in fit")
+    parser.add_argument("--plot_npcut", "-pl", action="store_true",
+                        default=False, help="save all plots")
     args = parser.parse_args()
 
     if args.project:
         project(args.cfg_file)
 
     if args.fit:
-        fit(args.cfg_file)
+        fit(args.cfg_file, args.fix_mean, args.plot_npcut)

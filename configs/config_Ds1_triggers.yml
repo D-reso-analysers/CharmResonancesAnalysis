@@ -1,22 +1,23 @@
 # -----inputs for raw yields --------------------------
-fileNameData: /data/lagliett/HF_data/FinalAnalysis/AO2D_TreeTaskDs1_TriggerLooseCut.root
+fileNameData: /data/lagliett/HF_data/AO2D_TreeTaskDs1_TriggerLooseCut.root
 treeNameData: O2hfcandresolite
-outputRawYield: /home/lagliett/alice/CharmResonancesAnalysis/raw_yield/output/rawYieldDs1_TRG.root
+outputRawYield: raw_yield/rawYieldDs1_TRG_central.root
 filteredDf: filteredTreeTaskDs1_TriggerLooseCut.parquet
-plotLabel: invMass_Ds1_TRG
+plotLabel: invMass_Ds1_TRG_central
 # -----inputs for efficiencies ------------------------
 # fileNameMC : /home/lagliett/alice/CharmResonanceAnalysis/data/TreeTaskDs1LHC24g6.root
-fileNameMC : /home/lagliett/alice/CharmResonancesAnalysis/data/TreeTask_Ds1_TRGcuts_LHC24g6_train303941.root
+fileNameMC : [/home/lagliett/alice/CharmResonancesAnalysis/data/TreeTask_Ds1_TRGcuts_LHC24g6_train303941.root, data/TreeTask_Ds1_TRGcuts_LHC24h2_train302432.root]
+mcWeights: [1, 7]
 treeNameRec: O2hfcandresolite
 treeNameGen: O2hfgenresolite
-outputEff: /home/lagliett/alice/CharmResonancesAnalysis/efficiency/efficiency_Ds1_LHC24g6_TRG.root
+outputEff: efficiency/efficiency_Ds1_combined_TRG_central.root
 # -----particle pdgcode: Ds1:10433, Ds2*:435 -----------
 pdgId: 10433
 # -----Cuts, same for efficiencies and yields-----------
 cutVars: 
   pt:
-    min:  [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 10., 12., 2.] 
-    max:  [3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 10., 12., 24., 24.]
+    min:  [2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 12.] 
+    max:  [3.0, 4.0, 5.0, 6.0, 8.0, 12., 24.]
     varname: 'fPt'
     useBachPt: false
   ptBach0:
@@ -25,37 +26,82 @@ cutVars:
     varname: 'fPtBach0'
     useBachPt: false
   invMass:
-    min: [ 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49]
-    max: [ 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89]
+    min: [ 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49]
+    max: [ 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89]
     varname: 'fM'
     useBachPt: false
-  bkgBdtScore:
-    min:  [ ~, ~, ~, ~, ~, ~, ~, ~, ~] 
-    max:  [ 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06]
-    varname: 'fMlScoreBkgBach0'
-    useBachPt: true
   invMassProng0:
-    min:  [ 0.1438, 0.1438, 0.1438, 0.1438, 0.1438, 0.1438, 0.1438] 
-    max:  [ 0.1468, 0.1468, 0.1468, 0.1468, 0.1468, 0.1468, 0.1468]
+    min:  [0.143, 0.143, 0.143, 0.143, 0.143, 0.143, 0.143] 
+    max:  [0.148, 0.148, 0.148, 0.148, 0.148, 0.148, 0.148]
     varname: 'fMBach0'
     useBachPt: true
     parametrized: false
   invMassProng1:
-    min:  [ 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882] 
-    max:  [ 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050]
+    min:  [ 0.485, 0.485, 0.485, 0.485, 0.485, 0.485, 0.485] 
+    max:  [ 0.5085, 0.5085, 0.5085, 0.5085, 0.5085, 0.5085, 0.5085]
     varname: 'fMBach1'
     useBachPt: false
+  bkgBdtScore:
+    min:  [ ~, ~, ~, ~, ~, ~, ~]
+    max:  [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06] 
+    varname: 'fMlScoreBkgBach0'
+    useBachPt: true
+  cpaBach1:
+    min:  [0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995]
+    max:  [~, ~, ~, ~, ~, ~, ~] 
+    varname: 'fCpaBach1'
+    useBachPt: false
+  radiusBach1:
+    min:  [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0] 
+    max:  [~, ~, ~, ~, ~, ~, ~] 
+    varname: 'fRadiusBach1'
+    useBachPt: false
+    
 # -----Invariant mass signal extraction configs-----------
 fit:
-  mass_mins: [ 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50]
-  mass_maxs: [ 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60]
+  mass_mins: [ 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50]
+  mass_maxs: [ 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60]
   sgn_funcs: [ "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian", "voigtian"]
   bkg_funcs: [ "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext"]
+  parameters:
+    - name: "mean"
+      value: "0.52485"
+      min: "0.519"
+      max: "0.529"
+    - name: "sigma"
+      value: "0.001"
+      min: "0.0001"
+      max: "0.003"
+    - name: "width"
+      value: "0.00046"
+      min: "0.00046"
+      max: "0.00046"
+    - name: "mTh"
+      value: "0.497611"
+      min: "0.497611"
+      max: "0.497611"
+    - name: "l"
+      value: "0.5"
+      min: "0.1"
+      max: "1"
+    - name: "alpha"
+      value: "0.2"
+      min: "-100"
+      max: "100"
+    - name: "beta"
+      value: "50"
+      min: "-100"
+      max: "100"
+    - name: "gamma"
+      value: "-500"
+      min: "-1000"
+      max: "1000"
 plot:
-  mass_mins: [0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50]
-  mass_maxs: [0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60]
-  nbins: [100, 100, 100, 100, 100, 100, 100, 100, 100, 100]
+  mass_mins: [0.50, 0.50, 0.50, 0.50, 0.50, 0.50, 0.50]
+  mass_maxs: [0.60, 0.60, 0.60, 0.60, 0.60, 0.60, 0.60]
+  nbins: [100, 100, 100, 100, 100, 100, 100]
+ 
 # -----Efficiency configs---------------------------------
-acceptFlags: [1, 4, 6]
+acceptFlags: [1, 5, 6]
 
 
