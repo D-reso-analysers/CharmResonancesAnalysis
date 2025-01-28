@@ -1,13 +1,13 @@
 hadron: ds1
 inputs:
-  cutvariation: cutvariation/cutvar_dstar_pp13dot6tev_MB_worseDca1p1.root
+  cutvariation: cutvariation/cutvar_dstar_pp13dot6tev_MB.root
   efficiencies:
-    file: systematics/efficiencies_nocutnp_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_worseDca1p1_BDTAnalysis_tight1.root
+    file: systematics/efficiencies_nocutnp_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis_tight1.root
     histonames:
       nonprompt: hist_eff_nonprompt
       prompt: hist_eff_prompt
   kinematics: kinematics/kine_ds1_pythia8_monash.root
-output: systematics/fraction_ds1_pp13dot6tev_MB_worseDca1p1_tight1.root
+output: systematics/fraction_ds1_pp13dot6tev_MB_tight1.root
 ptbins:
   maxs:
   - 3.0

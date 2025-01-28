@@ -72,15 +72,15 @@ hadron: dstar
 input:
   data: inputs/sparse_dstar_LHC22_LHC23_BDTAnalysis.root
   mc:
-  - inputs/sparse_dstar_LHC24g5_trackTuner_ptSmearing1p5_worseDca1p1_BDTAnalysis.root
-  - inputs/sparse_dstar_LHC24h1_trackTuner_ptSmearing1p5_worseDca1p1_BDTAnalysis.root
+  - inputs/sparse_dstar_LHC24g5_trackTuner_ptSmearing1p5_BDTAnalysis.root
+  - inputs/sparse_dstar_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis.root
   mc_weights:
   - 1.0
   - 2.3333
 output:
   efficiencies:
     directory: systematics
-    suffix: _dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_worseDca1p1_BDTAnalysis_loose5
+    suffix: _dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis_loose5
   rawyields:
     directory: rawyields
     suffix: _dstar_LHC22_LHC23_BDTAnalysis
