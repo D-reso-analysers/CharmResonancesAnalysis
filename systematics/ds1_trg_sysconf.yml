@@ -1,14 +1,14 @@
 # Inputs:
-fileNameData: /data/lagliett/HF_data/AO2D_TreeTaskDs1_TriggerLooseCut.root
+fileNameData: /home/luca/alice/CharmResonancesAnalysis/data/AO2D_TreeTaskDs1_TriggerLooseCut.root
 treeNameData: O2hfcandresolite
 
-fileNameMC: [../data/TreeTask_Ds1_TRGcuts_LHC24g6_train303941.root, ../data/TreeTask_Ds1_TRGcuts_LHC24h2_train302432.root]
+fileNameMC: [/home/luca/alice/CharmResonancesAnalysis/data/TRG_g6_303941.root, /home/luca/alice/CharmResonancesAnalysis/data/TRG_h2_302432.root]
 mcWeights: [1, 7]
 treeNameRec: O2hfcandresolite
 treeNameGen: O2hfgenresolite
 acceptFlags: [1, 5, 6]
 
-luminosityFile: /home/lagliett/alice/CharmResonancesAnalysis/normalisation/luminosityDs1_trigger.root
+luminosityFile: /home/luca/alice/CharmResonancesAnalysis/normalisation/luminosity_ds1_trg.root
 luminosityHist: hist_lumi
 
 particle: ds1
@@ -30,11 +30,11 @@ cutVars:
     max: [ 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89]
     varname: 'fM'
     useBachPt: false
-  # bkgBdtScore:
-  #   min:  [ ~, ~, ~, ~, ~, ~, ~]
-  #   max:  [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2] # loose cuts: limits from wagon. Minimum step is 0.001
-  #   varname: 'fMlScoreBkgBach0'
-  #   useBachPt: true
+  bkgBdtScore:
+    min:  [ ~, ~, ~, ~, ~, ~, ~]
+    max:  [0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2] # loose cuts: limits from wagon. Minimum step is 0.001
+    varname: 'fMlScoreBkgBach0'
+    useBachPt: true
   invMassProng0:
     min:  [ 0.142, 0.142, 0.142, 0.142, 0.142, 0.142, 0.142] 
     max:  [ 0.149, 0.149, 0.149, 0.149, 0.149, 0.149, 0.149]
@@ -128,119 +128,119 @@ bdtSelections:
   configurations:
     - name: "central"
       cuts: [0.06, 0.06, 0.06, 0.06, 0.06, 0.06, 0.06] 
-      frac_file: "../data/fraction_ds1_pp13dot6tev_MB_triggerCuts.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/fraction_ds1_pp13dot6tev_MB_triggerCuts.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight13"
       cuts: [0.004, 0.004, 0.004, 0.004, 0.004, 0.004, 0.004] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight13.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight13.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight12"
       cuts: [0.008, 0.008, 0.008, 0.008, 0.008, 0.008, 0.008] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight12.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight12.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight11"
       cuts: [0.012, 0.012, 0.012, 0.012, 0.012, 0.012, 0.012] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight11.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight11.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight10"
       cuts: [0.016, 0.016, 0.016, 0.016, 0.016, 0.016, 0.016] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight10.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight10.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight9"
       cuts: [0.020, 0.020, 0.020, 0.020, 0.020, 0.020, 0.020] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight9.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight9.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight8"
       cuts: [0.024, 0.024, 0.024, 0.024, 0.024, 0.024, 0.024] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight8.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight8.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight7"
       cuts: [0.028, 0.028, 0.028, 0.028, 0.028, 0.028, 0.028] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight7.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight7.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight6"
       cuts: [0.032, 0.032, 0.032, 0.032, 0.032, 0.032, 0.032] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight6.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight6.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight5"
       cuts: [0.036, 0.036, 0.036, 0.036, 0.036, 0.036, 0.036] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight5.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight5.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight4"
       cuts: [0.040, 0.040, 0.040, 0.040, 0.040, 0.040, 0.040] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight4.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight4.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight3"
       cuts: [0.044, 0.044, 0.044, 0.044, 0.044, 0.044, 0.044] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight3.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight3.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight2"
       cuts: [0.048, 0.048, 0.048, 0.048, 0.048, 0.048, 0.048] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight2.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight2.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight1"
       cuts: [0.052, 0.052, 0.052, 0.052, 0.052, 0.052, 0.052] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight1.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight1.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight0"
       cuts: [0.056, 0.056, 0.056, 0.056, 0.056, 0.056, 0.056] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight0.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_tight0.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose0"
       cuts: [0.07, 0.07, 0.07, 0.07, 0.07, 0.07, 0.07] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose0.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose0.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose1"
       cuts: [0.08, 0.08, 0.08, 0.08, 0.08, 0.08, 0.08] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose1.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose1.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose2"
       cuts: [0.09, 0.09, 0.09, 0.09, 0.09, 0.09, 0.09] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose2.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose2.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose3"
       cuts: [0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose3.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose3.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose4"
       cuts: [0.11, 0.11, 0.11, 0.11, 0.11, 0.11, 0.11] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose4.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose4.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose5"
       cuts: [0.12, 0.12, 0.12, 0.12, 0.12, 0.12, 0.12] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose5.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose5.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose6"
       cuts: [0.13, 0.13, 0.13, 0.13, 0.13, 0.13, 0.13] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose6.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose6.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose7"
       cuts: [0.14, 0.14, 0.14, 0.14, 0.14, 0.14, 0.14] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose7.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose7.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose8"
       cuts: [0.15, 0.15, 0.15, 0.15, 0.15, 0.15, 0.15] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose8.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose8.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose9"
       cuts: [0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose9.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose9.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose10"
       cuts: [0.17, 0.17, 0.17, 0.17, 0.17, 0.17, 0.17] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose10.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose10.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose11"
       cuts: [0.18, 0.18, 0.18, 0.18, 0.18, 0.18, 0.18] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose11.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose11.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose12"
       cuts: [0.19, 0.19, 0.19, 0.19, 0.19, 0.19, 0.19] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose12.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose12.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose13"
       cuts: [0.20, 0.20, 0.20, 0.20, 0.20, 0.20, 0.20] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose13.root"
+      frac_file: "/home/luca/alice/CharmResonancesAnalysis/data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_triggerCuts_loose13.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     # - name: "other_central"
     #   cuts: [0.016, 0.020, 0.085, 0.110, 0.360, 0.370, 0.240] 
@@ -422,7 +422,7 @@ rawYield:
       min: "0"
       max: "5"
   variations: #central values are assumed to be the first ones
-    mass_min: [0.500, 0.498, 0.502]
+    mass_min: [0.500, 0.498, 0.508]
     mass_max: [0.60, 0.56, 0.58, 0.62, 0.64]
     background_pdf: ["thr3", "thr1", "thrn", "cheb3"]
     width: [0.00046, 0.00043, 0.00049]
@@ -432,13 +432,13 @@ rawYield:
 tracking:
   outputFile: output/output_trk_sys_Ds1_trg.root
   optionalRawYieldOutput: output/fitdump_trk_sys_Ds1_trg.root
-  variations:  
+  variations:
     itsNCls0: [4, 5, 6]
     itsNCls1: [0, 3, 4]
     tpcRows0: [70, 85, 100]
     tpcRows1: [70, 100, 120]
-    tpcChi0: [3]
-    tpcChi1: [3]
+    tpcChi0: [4]
+    tpcChi1: [4]
 
 other_cuts:
   outputFile: output/output_mass_sys_Ds1_trg.root

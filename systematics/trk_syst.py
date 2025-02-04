@@ -111,10 +111,8 @@ if __name__ == "__main__":
             frac_file = conf['frac_file']
             frac_hist = conf['frac_hist']
             break
-
     dfDataCentralCut = applySelections2(dfDataFiltered, centralCuts)
     dfMcRecCentralCut = [applySelections2(dfRec, centralCuts, isMC=True, selectedFlags=flagsToKeep) for irec, dfRec in enumerate(dfRecList)]
-    
     # Load specific configurations andi initialize output histograms
 
     # retrieve configurations for yield extraction
@@ -155,7 +153,7 @@ if __name__ == "__main__":
     central_sigma = 0
     for ipt, (pt_min, pt_max) in enumerate(zip(pt_mins, pt_maxs)):
         # split dataframes in pt bins
-        dfDataPt = dfDataFiltered[(dfDataFiltered['fPt'] >= pt_min) & (dfDataFiltered['fPt'] < pt_max)]
+        dfDataPt = dfDataCentralCut[(dfDataCentralCut['fPt'] >= pt_min) & (dfDataCentralCut['fPt'] < pt_max)]
         mcRecPtList = [dfRec[(dfRec['fPt'] >= pt_min) & (dfRec['fPt'] < pt_max)] for dfRec in dfMcRecCentralCut]
         mcGenPtList = [dfGen[(dfGen['fPt'] >= pt_min) & (dfGen['fPt'] < pt_max)] for dfGen in dfGenList]
         i_conf = 0
@@ -178,8 +176,7 @@ if __name__ == "__main__":
                                 nRecPrompt, nGenPrompt = 0, 0
                                 for i, (dfRec, dfGen, w) in enumerate(zip(mcRecSelPtList, mcGenPtList, cfg['mcWeights'])):
                                     nGenPrompt += w * len(dfGen[dfGen['fOrigin'] == 1])
-                                    for flag in cfg['acceptFlags']:
-                                        nRecPrompt += w * len(dfRec[(dfRec['fFlagMcMatchRec'] == flag) & (dfRec['fOrigin'] == 1)])
+                                    nRecPrompt += w * len(dfRec[(dfRec['fOrigin'] == 1)])
                             
                                 nRecPrompt = nRecPrompt / np.sum(cfg['mcWeights'])
                                 nGenPrompt = nGenPrompt / np.sum(cfg['mcWeights'])

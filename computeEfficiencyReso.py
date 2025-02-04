@@ -28,10 +28,11 @@ def computeEfficiency(dfRecList, dfGenList, cfg, weights):
             nRecNonPrompt += w * len(dfRecCut[dfRecCut[f"{originLabel}"] == 2])
             nGenPrompt += w * len(dfGenCut[dfGenCut[f"{originLabel}"] == 1])
             nGenNonPrompt += w * len(dfGenCut[dfGenCut[f"{originLabel}"] == 2])
-        effPrompt.append(eff(nRecPrompt, nGenPrompt))
-        effErrPrompt.append(effErr(nRecPrompt, nGenPrompt))
-        effNonPrompt.append(eff(nRecNonPrompt, nGenNonPrompt))
-        effErrNonPrompt.append(effErr(nRecNonPrompt, nGenNonPrompt))
+        norm = np.sum(weights)
+        effPrompt.append(eff(nRecPrompt/norm, nGenPrompt/norm))
+        effErrPrompt.append(effErr(nRecPrompt/norm, nGenPrompt/norm))
+        effNonPrompt.append(eff(nRecNonPrompt/norm, nGenNonPrompt/norm))
+        effErrNonPrompt.append(effErr(nRecNonPrompt/norm, nGenNonPrompt/norm))
     return effPrompt , effErrPrompt, effNonPrompt, effErrNonPrompt
 
 def fillHisto(eff, effUnc, cfg):

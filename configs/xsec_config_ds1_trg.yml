@@ -5,8 +5,10 @@ effFile: efficiency/efficiency_Ds1_combined_TRG_central.root
 effHist: hEffPrompt
 fracFile: "data/fraction_ds1_pp13dot6tev_MB_triggerCuts.root"
 fracHist: "hist_frac_prompt_reso_vs_pt"
-luminosityFile: /home/lagliett/alice/CharmResonancesAnalysis/normalisation/luminosityDs1_trigger.root
+luminosityFile: normalisation/luminosity_ds1_trg.root
 luminosityHist: hist_lumi
+scaleDsEnergy: true
+scaleFile: "fonnl_ds_scaling/fonll_ratio_dmix_13dot6tev_13tev.root"
 particle: ds1
 # -----systematics ------------------------
 systematics:

@@ -65,9 +65,12 @@ if __name__ == "__main__":
     parser.add_argument("--input_run2", "-ir2", metavar="text",
                         default=None, 
                         help="input file with run2 ratios")
+    parser.add_argument("--input_energy_scale", "-ies", metavar="text",
+                        default=None, 
+                        help="input file with run2 ratios")
     parser.add_argument("--particle", "-p", metavar="text",
                         default="ds1",
-                        help="particle to be analyzed")
+                        help="particle to be analyzed [ds1, ds2star]")
     args = parser.parse_args()
 
     if args.particle == "ds1":
@@ -113,15 +116,19 @@ if __name__ == "__main__":
     h_ratio_syst = ROOT.TH1F(
     f"h_ratio_syst", f"{flag}/Ds ratio;{h_reso_stat_rebinned.GetXaxis().GetTitle()};{flag}/Ds", 
     len(common_bins) - 1, np.array(common_bins, np.float64))
-
+    if args.input_energy_scale:
+            data_energy_scale = ROOT.TFile.Open(args.input_energy_scale)
+            g_energy_scale = data_energy_scale.Get('graph_fonll_dmix_13dot6tev_13tev')
+            
     for ibin in range(1, h_reso_stat_rebinned.GetNbinsX() + 1):
-        r = h_reso_stat_rebinned.GetBinContent(ibin) / h_ds_y_rebinned.GetBinContent(ibin)
+        if args.input_energy_scale:
+            f = g_energy_scale.GetPointY(ibin -1)
+        else: 
+            f = 1
+        r = h_reso_stat_rebinned.GetBinContent(ibin) / h_ds_y_rebinned.GetBinContent(ibin)/f
         r_stat = r * ((h_reso_stat_rebinned.GetBinError(ibin) / h_reso_stat_rebinned.GetBinContent(ibin))**2 + (h_ds_stat_rebinned.GetBinContent(ibin) / h_ds_y_rebinned.GetBinContent(ibin))**2)**0.5
         r_syst = r * ((h_reso_syst_rebinned.GetBinError(ibin) / h_reso_syst_rebinned.GetBinContent(ibin))**2 + (h_ds_syst_rebinned.GetBinContent(ibin) / h_ds_y_rebinned.GetBinContent(ibin))**2)**0.5
-        # r_stat = r * ((h_reso_stat_rebinned.GetBinError(ibin) / h_reso_stat_rebinned.GetBinContent(ibin))**2 )**0.5
-        # r_syst = r * ((h_reso_syst_rebinned.GetBinError(ibin) / h_reso_syst_rebinned.GetBinContent(ibin))**2 )**0.5
-
-
+       
         h_ratio_stat.SetBinContent(ibin, r)
         h_ratio_stat.SetBinError(ibin, r_stat)
         h_ratio_syst.SetBinContent(ibin, r)
@@ -163,7 +170,7 @@ if __name__ == "__main__":
         g_ratio_syst.SetPointError(i, g_ratio_syst.GetErrorX(i)/2, g_ratio_syst.GetErrorY(i))
 
     c = ROOT.TCanvas('c', 'c', 700, 600)
-    h_frame = c.DrawFrame(1, 5.e4, 23.5, 1.e8, ';#it{p}_{T} (GeV/#it{c});d^{2}#sigma/d#it{p}_{T}d#it{y} (pb #kern[-0.5]{#it{c}} / GeV)')
+    h_frame = c.DrawFrame(2, 0, 24, 0.25, ';#it{p}_{T} (GeV/#it{c});D_{s1}^{+}/D_{s}^{+}')
     h_frame.GetXaxis().SetTitleOffset(1.1)
     h_frame.GetYaxis().SetTitleOffset(1.3)
     h_frame.GetXaxis().SetTitleSize(0.04)
@@ -171,8 +178,7 @@ if __name__ == "__main__":
     h_frame.GetXaxis().SetLabelSize(0.04)
     h_frame.GetYaxis().SetLabelSize(0.04)
     h_ratio_stat.GetYaxis().SetRangeUser( 0.0, 0.25)
-    h_ratio_stat.Draw('pE')
-    g_ratio_syst.Draw('same 5')
+    
 
     # optionally add run2 ratios
     if args.input_run2:
@@ -189,49 +195,49 @@ if __name__ == "__main__":
         r_syst_MB = (g_run2_syst.GetErrorYhigh(0)+0.09*g_run2_stat.GetY()[0])/br
         r_syst_HM = (g_run2_syst.GetErrorYhigh(1)+0.09*g_run2_stat.GetY()[1])/br
 
-        h_run2_stat = ROOT.TH1F("h_run2_stat", "", 1, 1, 23.5)
+        h_run2_stat = ROOT.TH1F("h_run2_stat", "", 1, 2, 24)
         h_run2_stat.SetBinContent(1, r_MB)
         h_run2_stat.SetBinError(1, r_stat_MB)
         h_run2_stat.SetLineColor(ROOT.kRed)
-        h_run2_stat.SetLineWidth(0)
-        h_run2_stat.SetMarkerStyle(0)
+        h_run2_stat.SetLineWidth(2)
+        h_run2_stat.SetMarkerStyle(20)
         h_run2_stat.SetMarkerColor(ROOT.kRed)
         h_run2_stat.SetMarkerSize(1.5)
         h_run2_stat.SetFillStyle(3006)
         h_run2_stat.SetFillColorAlpha(ROOT.kRed, 0.6)
 
-        h_run2_stat_HM = ROOT.TH1F("h_run2_stat_HM", "", 1, 1, 23.5)
+        h_run2_stat_HM = ROOT.TH1F("h_run2_stat_HM", "", 1, 1.8, 23.8)
         h_run2_stat_HM.SetBinContent(1, r_HM)
         h_run2_stat_HM.SetBinError(1, r_stat_HM)
         h_run2_stat_HM.SetLineColor(ROOT.kBlue)
-        h_run2_stat_HM.SetLineWidth(0)
-        h_run2_stat_HM.SetMarkerStyle(0)
+        h_run2_stat_HM.SetLineWidth(2)
+        h_run2_stat_HM.SetMarkerStyle(20)
         h_run2_stat_HM.SetMarkerColor(ROOT.kBlue)
         h_run2_stat_HM.SetMarkerSize(1.5)
         h_run2_stat_HM.SetFillStyle(23)
         h_run2_stat_HM.SetFillStyle(3004)
         h_run2_stat_HM.SetFillColorAlpha(ROOT.kBlue, 0.6)
 
-        h_run2_syst = ROOT.TH1F("h_run2_syst", "", 1, 1, 23.5)
+        h_run2_syst = ROOT.TH1F("h_run2_syst", "", 1, 2.6, 23.4)
         h_run2_syst.SetBinContent(1, r_MB)
         h_run2_syst.SetBinError(1, r_syst_MB)
         h_run2_syst.SetLineColor(ROOT.kRed)
-        h_run2_syst.SetLineWidth(0)
-        h_run2_syst.SetLineStyle(0)
-        h_run2_syst.SetFillStyle(3007)
+        h_run2_syst.SetLineWidth(2)
+        # h_run2_syst.SetLineStyle(0)
+        h_run2_syst.SetFillStyle(0)
         h_run2_syst.SetFillColorAlpha(ROOT.kRed, 0.6)
 
-        h_run2_syst_HM = ROOT.TH1F("h_run2_syst_HM", "", 1, 1, 23.5)
+        h_run2_syst_HM = ROOT.TH1F("h_run2_syst_HM", "", 1, 2.4, 23.2)
         h_run2_syst_HM.SetBinContent(1, r_HM)
         h_run2_syst_HM.SetBinError(1, r_syst_HM)
         h_run2_syst_HM.SetLineColor(ROOT.kBlue)
-        h_run2_syst_HM.SetFillStyle(3005)
+        h_run2_syst_HM.SetFillStyle(0)
         h_run2_syst_HM.SetFillColorAlpha(ROOT.kBlue, 0.6)
-        h_run2_syst_HM.SetLineWidth(0)
-        h_run2_syst_HM.SetLineStyle(0)
+        h_run2_syst_HM.SetLineWidth(2)
+        # h_run2_syst_HM.SetLineStyle(0)
 
-        h_run2_stat.Draw('same E2')
-        h_run2_stat_HM.Draw('same E2')
+        h_run2_stat.Draw('same E')
+        h_run2_stat_HM.Draw('same E')
         h_run2_syst.Draw('same E2')
         h_run2_syst_HM.Draw('same E2')
 
@@ -241,11 +247,12 @@ if __name__ == "__main__":
         legend.SetTextSize(0.03)
         legend.AddEntry(h_ratio_stat, "Run 3 Stat", "lep")
         legend.AddEntry(g_ratio_syst, "Run 3 Syst", "f")
-        legend.AddEntry(h_run2_stat, "Run 2 MB Stat", "f")
+        legend.AddEntry(h_run2_stat, "Run 2 MB Stat", "lep")
         legend.AddEntry(h_run2_syst, "Run 2 MB Syst", "f")
-        legend.AddEntry(h_run2_stat_HM, "Run 2 HM Stat", "f")
+        legend.AddEntry(h_run2_stat_HM, "Run 2 HM Stat", "lep")
         legend.AddEntry(h_run2_syst_HM, "Run 2 HM Syst", "f")
         legend.Draw()
-        
+    h_ratio_stat.Draw('pE same')
+    g_ratio_syst.Draw('same 5')
 
     c.SaveAs(f"ratio_{args.particle}.png")

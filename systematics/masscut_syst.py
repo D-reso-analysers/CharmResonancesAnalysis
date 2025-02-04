@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 import sys
 from particle import Particle
+import copy
 sys.path.insert(0, '..')
 from utils.analysis_utils import loadAO2D, applySelections, applySelections2, perform_roofit_fit, get_chi2_significance_sb, set_param
 
@@ -151,14 +152,15 @@ if __name__ == "__main__":
     h2_sb = ROOT.TH2F("h2_sb", "signal over background; pT[GeV/c]; cutset", len(pt_limits) - 1, pt_limits, nvars, -0.5, nvars - 0.5)
     h2_xsec = ROOT.TH2F("h2_xsec", "cross section; pT[GeV/c]; cutset", len(pt_limits) - 1, pt_limits, nvars, -0.5, nvars - 0.5)
     
-    central_mean = 0
-    central_sigma = 0
+    
     for ipt, (pt_min, pt_max) in enumerate(zip(pt_mins, pt_maxs)):
         # split dataframes in pt bins
-        dfDataPt = dfDataFiltered[(dfDataFiltered['fPt'] >= pt_min) & (dfDataFiltered['fPt'] < pt_max)]
+        dfDataPt = dfDataCentralCut[(dfDataCentralCut['fPt'] >= pt_min) & (dfDataCentralCut['fPt'] < pt_max)]
         mcRecPtList = [dfRec[(dfRec['fPt'] >= pt_min) & (dfRec['fPt'] < pt_max)] for dfRec in dfMcRecCentralCut]
         mcGenPtList = [dfGen[(dfGen['fPt'] >= pt_min) & (dfGen['fPt'] < pt_max)] for dfGen in dfGenList]
         i_conf = 0
+        central_mean = 0
+        central_sigma = 0
         # nested loop on variations
         for mass_min0 in mass_min0s:
             for mass_max0 in mass_max0s:
@@ -176,8 +178,7 @@ if __name__ == "__main__":
                         nRecPrompt, nGenPrompt = 0, 0
                         for i, (dfRec, dfGen, w) in enumerate(zip(mcRecSelPtList, mcGenPtList, cfg['mcWeights'])):
                             nGenPrompt += w * len(dfGen[dfGen['fOrigin'] == 1])
-                            for flag in cfg['acceptFlags']:
-                                nRecPrompt += w * len(dfRec[(dfRec['fFlagMcMatchRec'] == flag) & (dfRec['fOrigin'] == 1)])
+                            nRecPrompt += w * len(dfRec[(dfRec['fOrigin'] == 1)])
                     
                         nRecPrompt = nRecPrompt / np.sum(cfg['mcWeights'])
                         nGenPrompt = nGenPrompt / np.sum(cfg['mcWeights'])
@@ -186,7 +187,7 @@ if __name__ == "__main__":
                         h2_eff.SetBinContent(ipt + 1, i_conf + 1, eff)
                         h2_eff.SetBinError(ipt + 1, i_conf + 1, effErr)
                         # 3)raw yield
-                        fit_params = fit_params_def
+                        fit_params = copy.deepcopy(fit_params_def)
                         if i_conf > 0:
                             set_param(fit_params, "sigma", central_sigma, central_sigma, central_sigma)
                             set_param(fit_params, "mean", central_mean, central_mean, central_mean)

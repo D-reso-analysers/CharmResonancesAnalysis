@@ -68,7 +68,7 @@ def fit_with_roofit(cfg):
     pt_maxs = cfg["cutVars"]["pt"]["max"]
     outdir = os.path.dirname(cfg['outputRawYield'])
     outFileName = cfg['outputRawYield']
-    outfile = ROOT.TFile(outFileName, "recreate")
+    outfile = ROOT.TFile(f"raw_yield/rawYieldDs1_TRG_central_new.root", "recreate")
     df = pd.read_parquet(os.path.join(outdir, cfg['filteredDf']))
     pdgId = cfg['pdgId']
     
@@ -190,7 +190,7 @@ def fit_with_roofit(cfg):
         # mf2.Draw()
         
        
-        canvas_yield.SaveAs(os.path.join(outdir, "plots", f"{cfg['plotLabel']}_pt{pt_min}-{pt_max}.pdf"))
+        canvas_yield.SaveAs(os.path.join(outdir, "plots", f"{cfg['plotLabel']}_pt{pt_min}-{pt_max}_new.pdf"))
         # canvas_res.SaveAs(os.path.join(outdir, f"{cfg['plotLabel']}_res_pt{pt_min}-{pt_max}.pdf"))
     outfile.cd()
     hist_rawyield.Write()

@@ -1,11 +1,11 @@
 # -----inputs for raw yields --------------------------
-fileNameData: /data/lagliett/HF_data/AO2D_TaskDs1MB_train307666.root
+fileNameData: /home/luca/HF_data/FinalAnalysis/AO2D_TaskDs1MB_train307666.root
 treeNameData: O2hfcandresolite
 outputRawYield: raw_yield/rawYieldDs1_MB_central.root
 filteredDf: filteredTreeTaskDs1_MB.parquet
 plotLabel: invMass_Ds1_MB_central
 # -----inputs for efficiencies ------------------------
-fileNameMC : [/home/lagliett/alice/CharmResonancesAnalysis/data/TreeTask_Ds1_MBcuts_LHC24g6_train303734.root, /home/lagliett/alice/CharmResonancesAnalysis/data/TreeTask_Ds1_MBcuts_LHC24h2_train302431.root]
+fileNameMC : [/home/luca/alice/CharmResonancesAnalysis/data/MB_g6_303734.root, /home/luca/alice/CharmResonancesAnalysis/data/MB_h2_302431.root]
 mcWeights: [1, 7]
 treeNameRec: O2hfcandresolite
 treeNameGen: O2hfgenresolite

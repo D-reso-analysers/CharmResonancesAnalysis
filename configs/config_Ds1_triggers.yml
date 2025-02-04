@@ -1,12 +1,12 @@
 # -----inputs for raw yields --------------------------
-fileNameData: /data/lagliett/HF_data/AO2D_TreeTaskDs1_TriggerLooseCut.root
+fileNameData: /home/luca/alice/CharmResonancesAnalysis/data/AO2D_TreeTaskDs1_TriggerLooseCut.root
 treeNameData: O2hfcandresolite
 outputRawYield: raw_yield/rawYieldDs1_TRG_central.root
 filteredDf: filteredTreeTaskDs1_TriggerLooseCut.parquet
 plotLabel: invMass_Ds1_TRG_central
 # -----inputs for efficiencies ------------------------
 # fileNameMC : /home/lagliett/alice/CharmResonanceAnalysis/data/TreeTaskDs1LHC24g6.root
-fileNameMC : [/home/lagliett/alice/CharmResonancesAnalysis/data/TreeTask_Ds1_TRGcuts_LHC24g6_train303941.root, data/TreeTask_Ds1_TRGcuts_LHC24h2_train302432.root]
+fileNameMC : [/home/luca/alice/CharmResonancesAnalysis/data/TRG_g6_303941.root, /home/luca/alice/CharmResonancesAnalysis/data/TRG_h2_302432.root]
 mcWeights: [1, 7]
 treeNameRec: O2hfcandresolite
 treeNameGen: O2hfgenresolite
@@ -55,6 +55,36 @@ cutVars:
     min:  [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0] 
     max:  [~, ~, ~, ~, ~, ~, ~] 
     varname: 'fRadiusBach1'
+    useBachPt: false
+  itsNCls0:
+    min:  [ 4, 4, 4, 4, 4, 4, 4] 
+    max:  [ ~, ~, ~, ~, ~, ~, ~]
+    varname: 'fItsNClsProngMinBach0'
+    useBachPt: false
+  tpcRows0:
+    min:  [ 70, 70, 70, 70, 70, 70, 70] 
+    max:  [ ~, ~, ~, ~, ~, ~, ~]
+    varname: 'fTpcNClsCrossedRowsProngMinBach0'
+    useBachPt: false
+  tpcChi0:
+    min:  [ ~, ~, ~, ~, ~, ~, ~] 
+    max:  [ 4, 4, 4, 4, 4, 4, 4]
+    varname: 'fTpcChi2NClProngMaxBach0'
+    useBachPt: false
+  itsNCls1:
+    min:  [ 0, 0, 0, 0, 0, 0, 0] 
+    max:  [ ~, ~, ~, ~, ~, ~, ~]
+    varname: 'fItsNClsProngMinBach1'
+    useBachPt: false
+  tpcRows1:
+    min:  [ 70, 70, 70, 70, 70, 70, 70] 
+    max:  [ ~, ~, ~, ~, ~, ~, ~]
+    varname: 'fTpcNClsCrossedRowsProngMinBach1'
+    useBachPt: false
+  tpcChi1:
+    min:  [ ~, ~, ~, ~, ~, ~, ~] 
+    max:  [ 4, 4, 4, 4, 4, 4, 4]
+    varname: 'fTpcChi2NClProngMaxBach1'
     useBachPt: false
     
 # -----Invariant mass signal extraction configs-----------

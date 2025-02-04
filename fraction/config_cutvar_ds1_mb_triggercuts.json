@@ -1,0 +1,62 @@
+{
+    "rawyields": {
+        "inputdir": "/home/luca/alice/CharmResonancesAnalysis/cutvar_output",
+        "inputfiles": [
+            "cutvar_ds1_trg_np_cut_0.root",
+            "cutvar_ds1_trg_np_cut_1.root",
+            "cutvar_ds1_trg_np_cut_2.root",
+            "cutvar_ds1_trg_np_cut_3.root",
+            "cutvar_ds1_trg_np_cut_4.root",
+            "cutvar_ds1_trg_np_cut_5.root",
+            "cutvar_ds1_trg_np_cut_6.root",
+            "cutvar_ds1_trg_np_cut_7.root",
+            "cutvar_ds1_trg_np_cut_8.root",
+            "cutvar_ds1_trg_np_cut_9.root",
+            "cutvar_ds1_trg_np_cut_10.root",
+            "cutvar_ds1_trg_np_cut_11.root",
+            "cutvar_ds1_trg_np_cut_12.root",
+            "cutvar_ds1_trg_np_cut_13.root"
+        ],
+        "histoname": "hist_rawyield"
+    },
+    "efficiencies": {
+        "inputdir": "/home/luca/alice/CharmResonancesAnalysis/cutvar_output",
+        "inputfiles": [
+            "cutvar_ds1_trg_np_cut_0.root",
+            "cutvar_ds1_trg_np_cut_1.root",
+            "cutvar_ds1_trg_np_cut_2.root",
+            "cutvar_ds1_trg_np_cut_3.root",
+            "cutvar_ds1_trg_np_cut_4.root",
+            "cutvar_ds1_trg_np_cut_5.root",
+            "cutvar_ds1_trg_np_cut_6.root",
+            "cutvar_ds1_trg_np_cut_7.root",
+            "cutvar_ds1_trg_np_cut_8.root",
+            "cutvar_ds1_trg_np_cut_9.root",
+            "cutvar_ds1_trg_np_cut_10.root",
+            "cutvar_ds1_trg_np_cut_11.root",
+            "cutvar_ds1_trg_np_cut_12.root",
+            "cutvar_ds1_trg_np_cut_13.root"
+
+        ],
+        "histonames": {
+            "prompt": "hist_eff_prompt",
+            "nonprompt": "hist_eff_non_prompt"
+        }
+    },
+    "minimisation": {
+        "correlated": true
+    },
+    "central_efficiency": {
+        "computerawfrac": true,
+        "inputdir": "/home/luca/alice/CharmResonancesAnalysis/cutvar_output",
+        "inputfile": "cutvar_ds1_trg_central.root",
+        "histonames": {
+            "prompt": "hist_eff_prompt",
+            "nonprompt": "hist_eff_non_prompt"
+        }
+    },
+    "output": {
+        "directory": "cutvariation",
+        "file": "cutvar_ds1_pp13dot6tev_MB_triggerCuts.root"
+    }
+}

@@ -119,125 +119,125 @@ centralCuts:
 
 bdtSelections:
   # Outputs
-  outputFile: output/output_BDTsys_Ds1_MB_old.root
+  outputFile: output/output_BDTsys_Ds1_MB.root
   optionalRawYieldOutput: output/fitdump_BDTsys_Ds1_MB.root
   useOtherModel: false 
   configurations:
     - name: "central"
       cuts: [0.016, 0.020, 0.085, 0.110, 0.360, 0.370, 0.240] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose0.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight13"
       cuts: [0.002, 0.006, 0.015, 0.040, 0.080, 0.090, 0.100] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight13.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight13.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight12"
       cuts: [0.003, 0.007, 0.020, 0.045, 0.100, 0.110, 0.110] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight12.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight12.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight11"
       cuts: [0.004, 0.008, 0.025, 0.050, 0.120, 0.130, 0.120] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight11.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight11.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight10"
       cuts: [0.005, 0.009, 0.030, 0.055, 0.140, 0.150, 0.130] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight10.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight10.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight9"
       cuts: [0.006, 0.010, 0.035, 0.060, 0.160, 0.170, 0.140] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight9.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight9.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight8"
       cuts: [0.007, 0.011, 0.040, 0.065, 0.180, 0.190, 0.150] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight8.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight8.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight7"
       cuts: [0.008, 0.012, 0.045, 0.070, 0.200, 0.210, 0.160] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight7.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight7.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight6"
       cuts: [0.009, 0.013, 0.050, 0.075, 0.220, 0.230, 0.170] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight6.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight6.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight5"
       cuts: [0.010, 0.014, 0.055, 0.080, 0.240, 0.250, 0.180] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight5.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight5.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight4"
       cuts: [0.011, 0.015, 0.060, 0.085, 0.260, 0.270, 0.190] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight4.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight4.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight3"
       cuts: [0.012, 0.016, 0.065, 0.090, 0.280, 0.290, 0.200] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight3.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight3.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight2"
       cuts: [0.013, 0.017, 0.070, 0.095, 0.300, 0.310, 0.210] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight2.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight2.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight1"
       cuts: [0.014, 0.018, 0.075, 0.100, 0.320, 0.330, 0.220] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight1.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight1.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "tight0"
       cuts: [0.015, 0.019, 0.080, 0.105, 0.340, 0.350, 0.230] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_tight0.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight0.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose0"
       cuts: [0.017, 0.024, 0.100, 0.150, 0.390, 0.405, 0.265] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose0.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose0.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose1"
       cuts: [0.018, 0.028, 0.115, 0.190, 0.420, 0.440, 0.290] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose1.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose1.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose2"
       cuts: [0.019, 0.032, 0.130, 0.230, 0.450, 0.475, 0.315] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose2.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose2.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose3"
       cuts: [0.020, 0.036, 0.145, 0.270, 0.480, 0.510, 0.340] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose3.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose3.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose4"
       cuts: [0.021, 0.040, 0.160, 0.310, 0.510, 0.545, 0.365] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose4.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose4.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose5"
       cuts: [0.022, 0.044, 0.175, 0.350, 0.540, 0.580, 0.390] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose5.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose5.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose6"
       cuts: [0.023, 0.048, 0.190, 0.390, 0.570, 0.615, 0.415] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose6.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose6.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose7"
       cuts: [0.024, 0.052, 0.205, 0.430, 0.600, 0.650, 0.440] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose7.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose7.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose8"
       cuts: [0.025, 0.056, 0.220, 0.470, 0.630, 0.685, 0.465] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose8.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose8.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose9"
       cuts: [0.026, 0.060, 0.235, 0.510, 0.660, 0.720, 0.490] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose9.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose9.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose10"
       cuts: [0.027, 0.064, 0.250, 0.550, 0.690, 0.755, 0.515] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose10.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose10.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose11"
       cuts: [0.028, 0.068, 0.265, 0.590, 0.720, 0.790, 0.540] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose11.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose11.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose12"
       cuts: [0.029, 0.072, 0.280, 0.630, 0.750, 0.825, 0.565] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose12.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose12.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
     - name: "loose13"
       cuts: [0.030, 0.076, 0.295, 0.670, 0.780, 0.860, 0.590] 
-      frac_file: "../data/ds1_frac_syst/fraction_ds1_pp13dot6tev_MB_loose13.root"
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose13.root"
       frac_hist: "hist_frac_prompt_reso_vs_pt"
 
 # raw yield extraction

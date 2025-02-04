@@ -8,7 +8,7 @@ import pandas as pd
 import sys
 from particle import Particle
 sys.path.insert(0, '..')
-from utils.analysis_utils import loadAO2D, applySelections, perform_roofit_fit, get_chi2_significance_sb, set_param
+from utils.analysis_utils import loadAO2D, applySelections, applySelections2, perform_roofit_fit, get_chi2_significance_sb, set_param
 
 # main
 if __name__ == "__main__":
@@ -32,19 +32,11 @@ if __name__ == "__main__":
     inTreeNameData = cfg['treeNameData']
     dfData = loadAO2D(dataFileName, inTreeNameData)
     dfDataFiltered = applySelections(dfData, cfg, isMC=False)
-    dfDataFiltered = dfDataFiltered[['fM','fPt','fPtBach0', 'fMlScoreBkgBach0']]
 
     # apply central cut selections on BdtScore
-    configurations = cfg['bdtSelections']['configurations']
-    pt_bins_dau_min = cfg['cutVars']['ptBach0']['min']
-    pt_bins_dau_max = cfg['cutVars']['ptBach0']['max']
-    for conf in configurations:
-        if conf['name'] == 'central':
-            bdt_cuts = conf['cuts']
-            break
-    dfDataCentralCut = pd.DataFrame()
-    for i, (pt_min_d, pt_max_d, cut) in enumerate(zip(pt_bins_dau_min, pt_bins_dau_max, bdt_cuts)):
-        dfDataCentralCut = pd.concat([dfDataCentralCut, dfDataFiltered[(dfDataFiltered['fPtBach0'] >= pt_min_d) & (dfDataFiltered['fPtBach0'] < pt_max_d) & (dfDataFiltered['fMlScoreBkgBach0'] < cut)]])
+    centralCuts = cfg['centralCuts']
+    dfDataCentralCut = applySelections2(dfDataFiltered, centralCuts)
+    dfDataCentralCut = dfDataCentralCut[['fM','fPt','fPtBach0', 'fMlScoreBkgBach0']]
 
     # retrieve configurations for yield extraction
     pt_mins = cfg['cutVars']['pt']['min']
@@ -72,7 +64,7 @@ if __name__ == "__main__":
 
     for ipt, (pt_min, pt_max) in enumerate(zip(pt_mins, pt_maxs)):
         # split dataframes in pt bins
-        dfDataPt = dfDataFiltered[(dfDataCentralCut['fPt'] >= pt_min) & (dfDataFiltered['fPt'] < pt_max)]
+        dfDataPt = dfDataCentralCut[(dfDataCentralCut['fPt'] >= pt_min) & (dfDataCentralCut['fPt'] < pt_max)]
         i_conf = 0
         # nested loop on all variations
         for mass_min in mass_mins:
