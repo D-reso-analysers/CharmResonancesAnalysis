@@ -196,10 +196,10 @@ def fit(input_config, fix_mean, plot_npcut):
                 xaxis = r"$M(\mathrm{K}\pi\pi) - M(\mathrm{K}\pi)$ (GeV/$c^{2}$)"
             elif cfg["hadron"] == "dplus":
                 xaxis = r"$M(\mathrm{K}\pi\pi)$ (GeV/$c^{2}$)"
-            fig = fitter[ipt].plot_mass_fit(style="ATLAS", figsize=(8, 8), axis_title=xaxis)
+            fig = fitter[ipt].plot_mass_fit(style="ATLAS", figsize=(8, 8), axis_title=xaxis, show_extra_info = True)
             figres = fitter[ipt].plot_raw_residuals(figsize=(8, 8), style="ATLAS")
 
-            fig[0].savefig(
+            fig.savefig(
                 os.path.join(outputdir, f"massfit{suffix}_pt{pt_min:.1f}_{pt_max:.1f}_nocutnp.pdf")
             )
             figres.savefig(

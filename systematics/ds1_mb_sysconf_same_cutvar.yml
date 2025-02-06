@@ -1,0 +1,339 @@
+# Inputs:
+fileNameData:  /home/luca/HF_data/FinalAnalysis/AO2D_TaskDs1MB_train307666.root
+treeNameData: O2hfcandresolite
+
+fileNameMC:  [/home/luca/alice/CharmResonancesAnalysis/data/MB_g6_303734.root, /home/luca/alice/CharmResonancesAnalysis/data/MB_h2_302431.root]
+mcWeights: [1, 7]
+treeNameRec: O2hfcandresolite
+treeNameGen: O2hfgenresolite
+acceptFlags: [1, 5, 6]
+
+luminosityFile: /home/luca/alice/CharmResonancesAnalysis/normalisation/luminosity_ds1_MB.root
+luminosityHist: hist_lumi
+
+particle: ds1
+
+# preliminary selections (should bee looser than any successive variation)
+cutVars: 
+  pt:
+    min:  [2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 12.] 
+    max:  [3.0, 4.0, 5.0, 6.0, 8.0, 12., 24.]
+    varname: 'fPt'
+    useBachPt: false
+  ptBach0:
+    min:  [1.0, 2.0, 3.0, 5.0, 8.0, 12., 16.] 
+    max:  [2.0, 3.0, 5.0, 8.0, 12., 16., 100.]
+    varname: 'fPtBach0'
+    useBachPt: false
+  invMass:
+    min: [ 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49, 0.49]
+    max: [ 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89, 0.89]
+    varname: 'fM'
+    useBachPt: false
+  bkgBdtScore:
+    min:  [ ~, ~, ~, ~, ~, ~, ~]
+    max:  [0.030, 0.076, 0.295, 0.67, 0.78, 0.86, 0.59] # loose cuts: limits from wagon. Minimum step is 0.001
+    varname: 'fMlScoreBkgBach0'
+    useBachPt: true
+  invMassProng0:
+    min:  [ 0.142, 0.142, 0.142, 0.142, 0.142, 0.142, 0.142] 
+    max:  [ 0.149, 0.149, 0.149, 0.149, 0.149, 0.149, 0.149]
+    varname: 'fMBach0'
+    useBachPt: true
+    parametrized: false
+  invMassProng1:
+    min:  [ 0.48, 0.48, 0.48, 0.48, 0.48, 0.48, 0.48] 
+    max:  [ 0.5135, 0.5135, 0.5135, 0.5135, 0.5135, 0.5135, 0.5135]
+    varname: 'fMBach1'
+    useBachPt: false
+  itsNCls0:
+    min:  [ 4, 4, 4, 4, 4, 4, 4] 
+    max:  [ ~, ~, ~, ~, ~, ~, ~]
+    varname: 'fItsNClsProngMinBach0'
+    useBachPt: false
+  tpcRows0:
+    min:  [ 70, 70, 70, 70, 70, 70, 70] 
+    max:  [ ~, ~, ~, ~, ~, ~, ~]
+    varname: 'fTpcNClsCrossedRowsProngMinBach0'
+    useBachPt: false
+  tpcChi0:
+    min:  [ ~, ~, ~, ~, ~, ~, ~] 
+    max:  [ 4, 4, 4, 4, 4, 4, 4]
+    varname: 'fTpcChi2NClProngMaxBach0'
+    useBachPt: false
+  itsNCls1:
+    min:  [ 0, 0, 0, 0, 0, 0, 0] 
+    max:  [ ~, ~, ~, ~, ~, ~, ~]
+    varname: 'fItsNClsProngMinBach1'
+    useBachPt: false
+  tpcRows1:
+    min:  [ 70, 70, 70, 70, 70, 70, 70] 
+    max:  [ ~, ~, ~, ~, ~, ~, ~]
+    varname: 'fTpcNClsCrossedRowsProngMinBach1'
+    useBachPt: false
+  tpcChi1:
+    min:  [ ~, ~, ~, ~, ~, ~, ~] 
+    max:  [ 4, 4, 4, 4, 4, 4, 4]
+    varname: 'fTpcChi2NClProngMaxBach1'
+    useBachPt: false
+
+centralCuts:
+  pt:
+    min:  [2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 12.] 
+    max:  [3.0, 4.0, 5.0, 6.0, 8.0, 12., 24.]
+    varname: 'fPt'
+    useBachPt: false
+  ptBach0:
+    min:  [1.0, 2.0, 3.0, 5.0, 8.0, 12., 16.] 
+    max:  [2.0, 3.0, 5.0, 8.0, 12., 16., 100.]
+    varname: 'fPtBach0'
+    useBachPt: false
+  invMassProng0:
+    min:  [0.143, 0.143, 0.143, 0.143, 0.143, 0.143, 0.143] 
+    max:  [0.148, 0.148, 0.148, 0.148, 0.148, 0.148, 0.148]
+    varname: 'fMBach0'
+    useBachPt: true
+    parametrized: false
+  invMassProng1:
+    min:  [ 0.485, 0.485, 0.485, 0.485, 0.485, 0.485, 0.485] 
+    max:  [ 0.5085, 0.5085, 0.5085, 0.5085, 0.5085, 0.5085, 0.5085]
+    varname: 'fMBach1'
+    useBachPt: false
+  bkgBdtScore:
+    min:  [ ~, ~, ~, ~, ~, ~, ~]
+    max:  [0.016, 0.020, 0.085, 0.110, 0.360, 0.370, 0.240] 
+    varname: 'fMlScoreBkgBach0'
+    useBachPt: true
+  cpaBach1:
+    min:  [0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995]
+    max:  [~, ~, ~, ~, ~, ~, ~] 
+    varname: 'fCpaBach1'
+    useBachPt: false
+  radiusBach1:
+    min:  [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0] 
+    max:  [~, ~, ~, ~, ~, ~, ~] 
+    varname: 'fRadiusBach1'
+    useBachPt: false
+
+# variations for systematic uncertainties (assume same pT binning as for preliminary selections)
+
+bdtSelections:
+  # Outputs
+  outputFile: output/output_BDTsys_Ds1_MB.root
+  optionalRawYieldOutput: output/fitdump_BDTsys_Ds1_MB.root
+  useOtherModel: false 
+  configurations:
+    - name: "central"
+      cuts: [0.016, 0.020, 0.085, 0.110, 0.360, 0.370, 0.240] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight13"
+      cuts: [0.002, 0.006, 0.015, 0.040, 0.080, 0.090, 0.100] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight13.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight12"
+      cuts: [0.003, 0.007, 0.020, 0.045, 0.100, 0.110, 0.110] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight12.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight11"
+      cuts: [0.004, 0.008, 0.025, 0.050, 0.120, 0.130, 0.120] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight11.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight10"
+      cuts: [0.005, 0.009, 0.030, 0.055, 0.140, 0.150, 0.130] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight10.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight9"
+      cuts: [0.006, 0.010, 0.035, 0.060, 0.160, 0.170, 0.140] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight9.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight8"
+      cuts: [0.007, 0.011, 0.040, 0.065, 0.180, 0.190, 0.150] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight8.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight7"
+      cuts: [0.008, 0.012, 0.045, 0.070, 0.200, 0.210, 0.160] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight7.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight6"
+      cuts: [0.009, 0.013, 0.050, 0.075, 0.220, 0.230, 0.170] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight6.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight5"
+      cuts: [0.010, 0.014, 0.055, 0.080, 0.240, 0.250, 0.180] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight5.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight4"
+      cuts: [0.011, 0.015, 0.060, 0.085, 0.260, 0.270, 0.190] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight4.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight3"
+      cuts: [0.012, 0.016, 0.065, 0.090, 0.280, 0.290, 0.200] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight3.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight2"
+      cuts: [0.013, 0.017, 0.070, 0.095, 0.300, 0.310, 0.210] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight2.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight1"
+      cuts: [0.014, 0.018, 0.075, 0.100, 0.320, 0.330, 0.220] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight1.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "tight0"
+      cuts: [0.015, 0.019, 0.080, 0.105, 0.340, 0.350, 0.230] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_tight0.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose0"
+      cuts: [0.017, 0.024, 0.100, 0.150, 0.390, 0.405, 0.265] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose0.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose1"
+      cuts: [0.018, 0.028, 0.115, 0.190, 0.420, 0.440, 0.290] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose1.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose2"
+      cuts: [0.019, 0.032, 0.130, 0.230, 0.450, 0.475, 0.315] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose2.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose3"
+      cuts: [0.020, 0.036, 0.145, 0.270, 0.480, 0.510, 0.340] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose3.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose4"
+      cuts: [0.021, 0.040, 0.160, 0.310, 0.510, 0.545, 0.365] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose4.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose5"
+      cuts: [0.022, 0.044, 0.175, 0.350, 0.540, 0.580, 0.390] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose5.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose6"
+      cuts: [0.023, 0.048, 0.190, 0.390, 0.570, 0.615, 0.415] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose6.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose7"
+      cuts: [0.024, 0.052, 0.205, 0.430, 0.600, 0.650, 0.440] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose7.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose8"
+      cuts: [0.025, 0.056, 0.220, 0.470, 0.630, 0.685, 0.465] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose8.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose9"
+      cuts: [0.026, 0.060, 0.235, 0.510, 0.660, 0.720, 0.490] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose9.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose10"
+      cuts: [0.027, 0.064, 0.250, 0.550, 0.690, 0.755, 0.515] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose10.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose11"
+      cuts: [0.028, 0.068, 0.265, 0.590, 0.720, 0.790, 0.540] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose11.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose12"
+      cuts: [0.029, 0.072, 0.280, 0.630, 0.750, 0.825, 0.565] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose12.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+    - name: "loose13"
+      cuts: [0.030, 0.076, 0.295, 0.670, 0.780, 0.860, 0.590] 
+      frac_file: "../data/frac_syst_check/fraction_ds1_pp13dot6tev_MB_cutvartrigger_loose13.root"
+      frac_hist: "hist_frac_prompt_reso_vs_pt"
+
+# raw yield extraction
+rawYield:
+  # Outputs
+  outputFile: output/output_yield_sys_Ds1_MB.root
+  optionalRawYieldOutput: output/fitdump_yield_sys_Ds1_MB.root 
+  default_fit_config:
+    mass_min: 0.50
+    mass_max: 0.60
+    signal_pdf: "voigtian"
+    bkg_pdf: "thr3"
+    parameters:
+    - name: "mean"
+      value: "0.52485"
+      min: "0.519"
+      max: "0.529"
+    - name: "sigma"
+      value: "0.001"
+      min: "0.0001"
+      max: "0.003"
+    - name: "width"
+      value: "0.00046"
+      min: "0.00046"
+      max: "0.00046"
+    - name: "mTh"
+      value: "0.497611"
+      min: "0.497611"
+      max: "0.497611"
+    - name: "l"
+      value: "0.5"
+      min: "0.1"
+      max: "1"
+    - name: "alpha"
+      value: "0.2"
+      min: "-100"
+      max: "100"
+    - name: "beta"
+      value: "50"
+      min: "-100"
+      max: "100"
+    - name: "gamma"
+      value: "-500"
+      min: "-10000"
+      max: "10000"
+    - name: "a0"
+      value: "0.48"
+      min: "-100"
+      max: "100"
+    - name: "a1"
+      value: "-0.15"
+      min: "-100"
+      max: "100"
+    - name: "a2"
+      value: "0.029"
+      min: "-100"
+      max: "100"
+    - name: "a3"
+      value: "-0.022"
+      min: "-100"
+      max: "100"
+    - name: "n"
+      value: "1"
+      min: "0"
+      max: "5"
+  variations: #central values are assumed to be the first ones
+    mass_min: [0.500, 0.498, 0.502]
+    mass_max: [0.60, 0.56, 0.58, 0.62, 0.64]
+    background_pdf: ["thr3", "thr1", "thrn", "cheb3"]
+    width: [0.00046, 0.00043, 0.00049]
+
+# Tracking
+
+tracking:
+  outputFile: output/output_trk_sys_Ds1_MB.root
+  optionalRawYieldOutput: output/fitdump_trk_sys_Ds1_MB.root
+  variations:  
+    itsNCls0: [4, 5, 6]
+    itsNCls1: [0, 3, 4]
+    tpcRows0: [70, 85, 100]
+    tpcRows1: [70, 100, 120]
+    tpcChi0: [4]
+    tpcChi1: [4]
+
+other_cuts:
+  outputFile: output/output_mass_sys_Ds1_MB.root
+  optionalRawYieldOutput: output/fitdump_mass_sys_Ds1_MB.root
+  variations:
+    mass_min0: [0.143, 0.144, 0.142]
+    mass_max0: [0.148, 0.147, 0.149]
+    mass_min1: [0.485, 0.49, 0.48]
+    mass_max1: [0.5085, 0.5035, 0.5135]
+    cpa_min1: [0.995, 0.994, 0.996]
+    radius_min1: [1.0, 0.9, 1.1] 
+  # bkgBdtScore:
+  #   min:  [ 0.004, 0.004, 0.004, 0.004, 0.004, 0.004, 0.004, 0.004, 0.004]  # tightest cuts
+  #   central:  [ 0.060, 0.060, 0.060, 0.060, 0.060, 0.060, 0.060, 0.060, 0.060]  # central cuts
+  #   max:  [ 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2]  # loosest cuts
+  #   nsteps: [14, 14, 14, 14, 14, 14, 14] # number of steps between central and min or max

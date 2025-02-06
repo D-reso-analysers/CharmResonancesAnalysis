@@ -148,7 +148,7 @@ if __name__ == "__main__":
 
     c = ROOT.TCanvas('c', 'c', 700, 600)
     c.SetLogy()
-    h_frame = c.DrawFrame(2, 0.06, 24.0, 0.3, ';#it{p}_{T} (GeV/#it{c});d^{2}#sigma/d#it{p}_{T}d#it{y} (pb #kern[-0.5]{#it{c}} / GeV)')
+    h_frame = c.DrawFrame(2, 0.001, 24.0,10, ';#it{p}_{T} (GeV/#it{c});d^{2}#sigma/d#it{p}_{T}d#it{y} (#mub / GeV #kern[-0.5]{#it{c}}^{-1})')
     h_frame.GetXaxis().SetTitleOffset(1.1)
     h_frame.GetYaxis().SetTitleOffset(1.3)
     h_frame.GetXaxis().SetTitleSize(0.04)
@@ -171,12 +171,6 @@ if __name__ == "__main__":
     text_conj.SetTextSize(0.04)
     text_conj.SetTextFont(42)
     text_conj.Draw()
-
-    text_ALICE = ROOT.TLatex(0.55, 0.7, 'Work in Progress')
-    text_ALICE.SetNDC()
-    text_ALICE.SetTextSize(0.06)
-    text_ALICE.SetTextFont(42)
-    text_ALICE.Draw()
 
     text_pp = ROOT.TLatex(0.55, 0.65, 'pp collisions, #sqrt{#it{s}} = 13.6 TeV')
     text_pp.SetNDC()

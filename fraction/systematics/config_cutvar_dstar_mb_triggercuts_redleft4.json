@@ -1,0 +1,93 @@
+{
+    "rawyields": {
+        "inputdir": "rawyields",
+        "inputfiles": [
+            "rawyields_bdtnp0.40_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.42_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.44_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.46_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.48_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.50_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.52_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.54_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.56_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.58_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.60_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.62_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.64_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.66_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.68_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.70_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.72_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.74_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.76_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.78_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.80_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.82_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.84_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.86_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.88_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.90_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.92_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.94_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.96_dstar_LHC22_LHC23.root",
+            "rawyields_bdtnp0.98_dstar_LHC22_LHC23.root"
+        ],
+        "histoname": "hist_rawyield"
+    },
+    "efficiencies": {
+        "inputdir": "efficiencies",
+        "inputfiles": [
+            "efficiencies_bdtnp0.40_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.42_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.44_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.46_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.48_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.50_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.52_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.54_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.56_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.58_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.60_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.62_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.64_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.66_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.68_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.70_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.72_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.74_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.76_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.78_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.80_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.82_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.84_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.86_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.88_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.90_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.92_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.94_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.96_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.98_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root"
+        ],
+        "histonames": {
+            "prompt": "hist_eff_prompt",
+            "nonprompt": "hist_eff_nonprompt"
+        }
+    },
+    "minimisation": {
+        "correlated": true
+    },
+    "central_efficiency": {
+        "computerawfrac": true,
+        "inputdir": "efficiencies",
+        "inputfile": "efficiencies_nocutnp_dstar_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+        "histonames": {
+            "prompt": "hist_eff_prompt",
+            "nonprompt": "hist_eff_nonprompt"
+        }
+    },
+    "output": {
+        "directory": "systematics",
+        "file": "cutvar_dstar_pp13dot6tev_MB_triggerCuts_redleft4.root"
+    }
+}

@@ -103,19 +103,28 @@ def compute_fraction(config):
     with alive_bar(len(df_kine), title='Processing kinematics') as bar:
         for pt_dau, pt_reso in zip(df_kine["ptDdau"].to_numpy(), df_kine["ptDreso"].to_numpy()):
             hist_kinematics.Fill(pt_dau, pt_reso)
-            pt_dau_bin = hist_frac_prompt_dau.GetXaxis().FindBin(pt_dau)
+            pt_dau_bin = hist_corry_prompt.GetXaxis().FindBin(pt_dau)
             if pt_dau_bin < 1:
                 pt_dau_bin = 1
-            elif pt_dau_bin > hist_frac_prompt_dau.GetNbinsX():
-                pt_dau_bin = hist_frac_prompt_dau.GetNbinsX()
-            frac_dau = hist_frac_prompt_dau.GetBinContent(pt_dau_bin)
-            frac = 1 - ((1 - frac_dau) * scale_factor)
-            frac_scalefactmax = 1 - ((1 - frac_dau) * (scale_factor - scale_factor_unc))
-            frac_scalefactmin = 1 - ((1 - frac_dau) * (scale_factor + scale_factor_unc))
-            statunc_frac_dau = hist_frac_prompt_dau.GetBinError(pt_dau_bin)
-            statunc_frac = statunc_frac_dau * scale_factor
-            frac_statmin = frac - statunc_frac
-            frac_statmax = frac + statunc_frac
+            elif pt_dau_bin > hist_corry_prompt.GetNbinsX():
+                pt_dau_bin = hist_corry_prompt.GetNbinsX()
+            corry_prompt_dau = hist_corry_prompt.GetBinContent(pt_dau_bin)
+            corry_nonprompt_dau = hist_corry_nonprompt.GetBinContent(pt_dau_bin)
+            eff_prompt_dau = hist_eff_prompt.GetBinContent(pt_dau_bin)
+            eff_nonprompt_dau = hist_eff_nonprompt.GetBinContent(pt_dau_bin)
+
+            nonprompt = corry_nonprompt_dau * eff_nonprompt_dau
+            prompt = corry_prompt_dau * eff_prompt_dau
+            frac = 1 - scale_factor * nonprompt / (scale_factor * nonprompt + prompt)
+            frac_scalefactmax = 1 - (scale_factor - scale_factor_unc) * nonprompt / (
+                (scale_factor - scale_factor_unc) * nonprompt + prompt)
+            frac_scalefactmin = 1 - (scale_factor + scale_factor_unc) * nonprompt / (
+                (scale_factor + scale_factor_unc) * nonprompt + prompt)
+
+            rel_statunc_frac_dau = hist_frac_prompt_dau.GetBinError(pt_dau_bin) / \
+                hist_frac_prompt_dau.GetBinContent(pt_dau_bin)
+            frac_statmin = frac * (1 - rel_statunc_frac_dau)
+            frac_statmax = frac * (1 + rel_statunc_frac_dau)
             frac_sysmin = frac * (1 - rel_sys_unc[pt_dau_bin - 1])
             frac_sysmax = frac * (1 + rel_sys_unc[pt_dau_bin - 1])
 
@@ -135,8 +144,8 @@ def compute_fraction(config):
     graph_frac_prompt_reso_sysscale = ROOT.TGraphAsymmErrors(1)
     graph_frac_prompt_reso_systot = ROOT.TGraphAsymmErrors(1)
     graph_frac_prompt_reso_sys.SetName("graph_frac_prompt_reso_sys")
-    graph_frac_prompt_reso_sysscale.SetName("graph_frac_prompt_reso_sys")
-    graph_frac_prompt_reso_systot.SetName("graph_frac_prompt_reso_sys")
+    graph_frac_prompt_reso_sysscale.SetName("graph_frac_prompt_reso_sysscale")
+    graph_frac_prompt_reso_systot.SetName("graph_frac_prompt_reso_systot")
     for ipt in range(1, hist_frac_prompt_reso.GetNbinsX() + 1):
         htmp = hist_frac_prompt_reso_vs_pt["cent"].ProjectionY(f"htmp_{ipt}", ipt, ipt)
         htmp_statmin = hist_frac_prompt_reso_vs_pt["statmin"].ProjectionY(f"htmp_statmin_{ipt}", ipt, ipt)

@@ -391,6 +391,10 @@ def get_chi2_significance_sb(ws, nbins, outfile = None, name = None):
     sigma = ws.var("sigma").getVal()
     mean = ws.var("mean").getVal()
     b = ws.var("nBkg").getVal()
+    s_err = ws.var("nSig").getError()
+    sigma_err = ws.var("sigma").getError()
+    mean_err = ws.var("mean").getError()
+    b_err = ws.var("nBkg").getError()
     
     mass.setRange("signal_range", mean - 3 * sigma, mean + 3 * sigma)
     integral_bkg = bkgPdf.createIntegral(ROOT.RooArgSet(mass), ROOT.RooFit.NormSet(ROOT.RooArgSet(mass)), ROOT.RooFit.Range("signal_range"))
@@ -408,10 +412,10 @@ def get_chi2_significance_sb(ws, nbins, outfile = None, name = None):
         legend.SetFillStyle(0)  # Transparent background
         legend.SetTextSize(0.035)
         legend.AddEntry("", f"#chi^{{2}}/ndf = {chi2:.2f}", "")  # Add chi-squared
-        legend.AddEntry("", f"Mean = {(mean*1000):.2f} #pm {(ws.var("mean").getError()*1000):.2f} MeV/c^{{2}}", "")  # Add mean
-        legend.AddEntry("", f"#sigma = {(sigma*1000):.2f} #pm {(ws.var("sigma").getError()*1000):.2f} MeV/c^{{2}}", "")  # Add sigma
-        legend.AddEntry("", f"S = {s:.0f} #pm {ws.var("nSig").getError():.0f}", "")
-        legend.AddEntry("", f"B(3 #sigma) = {(b * integral_value):.0f} #pm {(ws.var("nBkg").getError() * np.sqrt(integral_value)):.0f}", "")
+        legend.AddEntry("", f"Mean = {(mean*1000):.2f} #pm {(mean_err*1000):.2f} MeV/c^{{2}}", "")  # Add mean
+        legend.AddEntry("", f"#sigma = {(sigma*1000):.2f} #pm {(sigma_err*1000):.2f} MeV/c^{{2}}", "")  # Add sigma
+        legend.AddEntry("", f"S = {s:.0f} #pm {s_err:.0f}", "")
+        legend.AddEntry("", f"B(3 #sigma) = {(b * integral_value):.0f} #pm {(b_err * np.sqrt(integral_value)):.0f}", "")
         legend.AddEntry("", f"Significance = {significance:.1f}", "")  # Add significance
         legend.AddEntry("", f"S/B = {s/(b * integral_value):.3f}", "")  # Add s/b
 

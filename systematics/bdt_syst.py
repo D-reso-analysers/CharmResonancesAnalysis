@@ -79,7 +79,6 @@ if __name__ == "__main__":
     luminosityFile = ROOT.TFile(cfg['luminosityFile'])
     luminosityHist = luminosityFile.Get(cfg['luminosityHist'])
     luminosity = luminosityHist.GetBinContent(1)
-
     # Load branching ratio
     if cfg['particle'] == "ds1":
         br = br_ds1 * br_dstar * br_k0
@@ -96,7 +95,7 @@ if __name__ == "__main__":
      # apply central cut selections except on BdtScore
     centralCuts = cfg['centralCuts']
     flagsToKeep = cfg['acceptFlags']
-    dfDataFiltered = applySelections2(dfDataFiltered, centralCuts, varsToSkip = ['bkgBdtScore'])
+    dfDataCentralCut = applySelections2(dfDataFiltered, centralCuts, varsToSkip = ['bkgBdtScore'])
     dfRecList = [applySelections2(dfRec, centralCuts, varsToSkip = ['bkgBdtScore'], isMC=True, selectedFlags=flagsToKeep) for irec, dfRec in enumerate(dfRecList)]
    
     # If enabled, load data processed with other BDT to add to systematics
@@ -151,7 +150,7 @@ if __name__ == "__main__":
     
     for ipt, (pt_min, pt_max) in enumerate(zip(pt_bins_min, pt_bins_max)):
         # split dataframes in pt bins
-        dfDataPt = dfDataFiltered[(dfDataFiltered['fPt'] >= pt_min) & (dfDataFiltered['fPt'] < pt_max)]
+        dfDataPt = dfDataCentralCut[(dfDataCentralCut['fPt'] >= pt_min) & (dfDataCentralCut['fPt'] < pt_max)]
         mcRecPtList = [dfRec[(dfRec['fPt'] >= pt_min) & (dfRec['fPt'] < pt_max)] for dfRec in dfRecList]
         mcGenPtList = [dfGen[(dfGen['fPt'] >= pt_min) & (dfGen['fPt'] < pt_max)] for dfGen in dfGenList]
         if cfg['bdtSelections']['useOtherModel']:
@@ -195,11 +194,11 @@ if __name__ == "__main__":
                 mcRecSel = [pd.concat([mcRecSel[irec], dfRec[(dfRec['fPtBach0'] >= pt_min_d) & (dfRec['fPtBach0'] < pt_max_d) & (dfRec['fMlScoreBkgBach0'] < cut)]]) for irec, dfRec in enumerate(mcRec)]
             # 2) compute efficiency
             nRecPrompt, nGenPrompt = 0, 0
+            
             for i, (dfRec, dfGen, w) in enumerate(zip(mcRecSel, mcGen, cfg['mcWeights'])):
+                unique_flags = dfRec['fFlagMcMatchRec'].unique()
                 nGenPrompt += w * len(dfGen[dfGen['fOrigin'] == 1])
-                for flag in cfg['acceptFlags']:
-                    nRecPrompt += w * len(dfRec[(dfRec['fFlagMcMatchRec'] == flag) & (dfRec['fOrigin'] == 1)])
-           
+                nRecPrompt += w * len(dfRec[(dfRec['fOrigin'] == 1)])
             nRecPrompt = nRecPrompt / np.sum(cfg['mcWeights'])
             nGenPrompt = nGenPrompt / np.sum(cfg['mcWeights'])
             eff, effErr = compute_efficiency(nRecPrompt, nGenPrompt)
