@@ -1,7 +1,7 @@
 # -----inputs for raw yields --------------------------
 fileNameData:  /data/lagliett/HF_data/AO2D_TaskDs2StarMB_train307545.root # Task output not there
 treeNameData: O2hfcandresolite
-outputRawYield: raw_yield/output/rawYieldDs2Star_MB.root
+outputRawYield: raw_yield/rawYieldDs2Star_MB.root
 filteredDf: filteredTreeTaskDs2Star_MB.parquet
 plotLabel: invMass_Ds2Star_MB
 # -----inputs for efficiencies ------------------------
@@ -15,7 +15,7 @@ pdgId: 435
 # -----Cuts, same for efficiencies and yields-----------
 cutVars: 
   pt:
-    min:  [ 2.0, 4.0, 6.0, 8.0, 12., 5] 
+    min:  [ 2.0, 4.0, 6.0, 8.0, 12., 2] 
     max:  [ 4.0, 6.0, 8.0, 12., 24., 24]
     varname: 'fPt'
     useBachPt: false

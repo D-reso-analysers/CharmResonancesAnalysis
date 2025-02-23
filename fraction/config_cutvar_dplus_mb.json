@@ -100,6 +100,6 @@
     },
     "output": {
         "directory": "cutvariation",
-        "file": "cutvar_dplus_pp13dot6tev_MB.root"
+        "file": "cutvar_dplus_pp13dot6tev_MB_new.root"
     }
 }

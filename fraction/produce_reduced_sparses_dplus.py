@@ -83,7 +83,7 @@ if __name__ == "__main__":
                         default="AnalysisResults_LHC22o_pass7.root",
                         help="input root file", required=False)
     parser.add_argument("--output_file", "-o", metavar="text",
-                        default="sparse_dstar_LHC22o_pass7.root",
+                        default="sparse_dplus_LHC22o_pass7.root",
                         help="output file", required=False)
     parser.add_argument("--is_mc", "-mc", action="store_true",
                         default=False, help="flag for MC")

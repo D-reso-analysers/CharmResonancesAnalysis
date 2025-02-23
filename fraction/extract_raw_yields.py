@@ -116,7 +116,7 @@ def perform_fit(file_name, histo_name, fitter_name, sgn_func, bkg_func, mass_min
     return fitter
 
 # function to perform fits
-def fit(input_config):
+def fit(input_config, fix_mean, plot_npcut):
     """
     Method for fitting
     """
@@ -252,7 +252,7 @@ def fit(input_config):
             fig = fitter[ipt].plot_mass_fit(style="ATLAS", figsize=(8, 8), axis_title=xaxis)
             figres = fitter[ipt].plot_raw_residuals(figsize=(8, 8), style="ATLAS")
 
-            fig[0].savefig(
+            fig.savefig(
                 os.path.join(outputdir, f"massfit{suffix}_pt{pt_min:.1f}_{pt_max:.1f}_nocutnp.pdf")
             )
             figres.savefig(
@@ -284,6 +284,12 @@ def fit(input_config):
                     rawyield = fitter_pt_cutvar[icut].get_raw_yield_bincounting(0) # 3sigma by default
                 hist_rawyield_cutvar[icut].SetBinContent(ipt+1, rawyield[0])
                 hist_rawyield_cutvar[icut].SetBinError(ipt+1, rawyield[1])
+                if plot_npcut:
+                    fig = fitter_pt_cutvar[icut].plot_mass_fit(style="ATLAS", figsize=(8, 8), axis_title=r"Inv Mass (GeV/c^2)", show_extra_info = True)
+                    fig[0].savefig(
+                        os.path.join(outputdir, "plots_npcut", f"massfit{suffix}_pt{pt_min:.1f}_{pt_max:.1f}_cutnp_{bdt_np_mins[icut]}.pdf")
+                    )
+                    
 
     for icut, bdt_np_min in enumerate(bdt_np_mins):
         outfile_name_cutvar = os.path.join(
@@ -462,4 +468,4 @@ if __name__ == "__main__":
         get_templates(args.cfg_file)
 
     if args.fit:
-        fit(args.cfg_file)
+        fit(args.cfg_file, args.fix_mean, args.plot_npcut)

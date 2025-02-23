@@ -1,0 +1,435 @@
+{
+    "internal-dpl-clock": "",
+    "internal-dpl-aod-reader": {
+        "aod-file-private": "\/home\/luca\/HF_data\/FinalAnalysis\/AO2D_DplusV0_TRGcuts_LHC24g6_train302309.root",
+        "aod-max-io-rate": "0",
+        "time-limit": "0",
+        "orbit-offset-enumeration": "0",
+        "orbit-multiplier-enumeration": "0",
+        "start-value-enumeration": "0",
+        "end-value-enumeration": "-1",
+        "step-value-enumeration": "1"
+    },
+    "hf-candidate-creator-charm-reso-reduced": {
+        "rejectDV0PairsWithCommonDaughter": "true",
+        "keepSideBands": "false",
+        "activateQA": "true",
+        "binsPt": {
+            "values": [
+                "1",
+                "2",
+                "4",
+                "6",
+                "8",
+                "12",
+                "24",
+                "1000"
+            ]
+        },
+        "cutsDdaughter": {
+            "labels_rows": [
+                "pT bin 0",
+                "pT bin 1",
+                "pT bin 2",
+                "pT bin 3",
+                "pT bin 4",
+                "pT bin 5",
+                "pT bin 6",
+                "pT bin 7"
+            ],
+            "labels_cols": [
+                "invMassSignalLow",
+                "invMassSignalHigh",
+                "invMassLeftSBLow",
+                "invMassLeftSBHigh",
+                "invMassRightSBLow",
+                "invMassRightSBHigh"
+            ],
+            "values": [
+                [
+                    "1.7",
+                    "2.05",
+                    "1.77",
+                    "1.8100000000000001",
+                    "1.9199999999999999",
+                    "1.96"
+                ],
+                [
+                    "1.7",
+                    "2.05",
+                    "1.77",
+                    "1.8100000000000001",
+                    "1.9199999999999999",
+                    "1.96"
+                ],
+                [
+                    "1.7",
+                    "2.05",
+                    "1.77",
+                    "1.8100000000000001",
+                    "1.9199999999999999",
+                    "1.96"
+                ],
+                [
+                    "1.7",
+                    "2.05",
+                    "1.77",
+                    "1.8100000000000001",
+                    "1.9199999999999999",
+                    "1.96"
+                ],
+                [
+                    "1.7",
+                    "2.05",
+                    "1.77",
+                    "1.8100000000000001",
+                    "1.9199999999999999",
+                    "1.96"
+                ],
+                [
+                    "1.7",
+                    "2.05",
+                    "1.77",
+                    "1.8100000000000001",
+                    "1.9199999999999999",
+                    "1.96"
+                ],
+                [
+                    "1.7",
+                    "2.05",
+                    "1.77",
+                    "1.8100000000000001",
+                    "1.9199999999999999",
+                    "1.96"
+                ],
+                [
+                    "1.7",
+                    "2.05",
+                    "1.77",
+                    "1.8100000000000001",
+                    "1.9199999999999999",
+                    "1.96"
+                ]
+            ]
+        },
+        "binsPtD": {
+            "values": [
+                "0",
+                "1",
+                "2",
+                "4",
+                "6",
+                "8",
+                "12",
+                "24",
+                "1000"
+            ]
+        },
+        "cutsV0daughter": {
+            "labels_rows": "",
+            "labels_cols": [
+                "invMassLow",
+                "invMassHigh",
+                "cpaMin",
+                "dcaMax",
+                "radiusMin"
+            ],
+            "values": [
+                [
+                    "0.47999999999999998",
+                    "0.52000000000000002",
+                    "0.98999999999999999",
+                    "1",
+                    "0.90000000000000002"
+                ],
+                [
+                    "0.47999999999999998",
+                    "0.52000000000000002",
+                    "0.98999999999999999",
+                    "1",
+                    "0.90000000000000002"
+                ],
+                [
+                    "0.47999999999999998",
+                    "0.52000000000000002",
+                    "0.98999999999999999",
+                    "1",
+                    "0.90000000000000002"
+                ],
+                [
+                    "0.47999999999999998",
+                    "0.52000000000000002",
+                    "0.98999999999999999",
+                    "1",
+                    "0.90000000000000002"
+                ],
+                [
+                    "0.47999999999999998",
+                    "0.52000000000000002",
+                    "0.98999999999999999",
+                    "1",
+                    "0.90000000000000002"
+                ],
+                [
+                    "0.47999999999999998",
+                    "0.52000000000000002",
+                    "0.98999999999999999",
+                    "1",
+                    "0.90000000000000002"
+                ],
+                [
+                    "0.47999999999999998",
+                    "0.52000000000000002",
+                    "0.98999999999999999",
+                    "1",
+                    "0.90000000000000002"
+                ]
+            ]
+        },
+        "binsPtV0": {
+            "values": [
+                "0",
+                "1",
+                "2",
+                "4",
+                "8",
+                "12",
+                "24",
+                "1000"
+            ]
+        },
+        "numberEventsMixed": "5",
+        "numberEventsToSkip": "-1",
+        "multPoolBins": {
+            "values": [
+                "0",
+                "0",
+                "45",
+                "60",
+                "75",
+                "95",
+                "250"
+            ]
+        },
+        "zPoolBins": {
+            "values": [
+                "0",
+                "-10",
+                "-4",
+                "-1",
+                "1",
+                "4",
+                "10"
+            ]
+        },
+        "processDs2StarToDplusK0s": "false",
+        "processDs2StarToDplusK0sWithMl": "true",
+        "processDs2StarToDplusK0sMixedEvent": "false",
+        "processDs2StarToDplusK0sMixedEventWithMl": "false",
+        "processDs1ToDstarK0s": "false",
+        "processDs1ToDstarK0sWithMl": "false",
+        "processDs1ToDstarK0sMixedEvent": "false",
+        "processDs1ToDstarK0sMixedEventWithMl": "false",
+        "processXcToDplusLambda": "false",
+        "processXcToDplusLambdaWithMl": "false",
+        "processLambdaDminus": "false",
+        "processLambdaDminusWithMl": "false",
+        "processDstarTrack": "false",
+        "processDstarTrackWithMl": "false"
+    },
+    "hf-candidate-creator-charm-reso-reduced-expressions": {
+        "axisPt": {
+            "values": [
+                "0",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "8",
+                "12",
+                "24",
+                "50"
+            ]
+        },
+        "axisInvMassReso": {
+            "values": [
+                "400",
+                "0.49000000953674322",
+                "0.88999998569488525"
+            ]
+        },
+        "axisInvMassProng0": {
+            "values": [
+                "200",
+                "1.7",
+                "2.05"
+            ]
+        },
+        "axisInvMassProng1": {
+            "values": [
+                "200",
+                "0.46999999999999997",
+                "0.53000000000000003"
+            ]
+        },
+        "axisInvMassD0": {
+            "values": [
+                "200",
+                "1.6499999999999999",
+                "2.0499999999999998"
+            ]
+        },
+        "axisDebug": {
+            "values": [
+                "16",
+                "-0.5",
+                "15.5"
+            ]
+        },
+        "axisOrigin": {
+            "values": [
+                "3",
+                "-0.5",
+                "2.5"
+            ]
+        },
+        "processMc": "true",
+        "processDummy": "false"
+    },
+    "hf-task-charm-reso-reduced": {
+        "ptMinReso": "-1",
+        "fillTrees": "true",
+        "fillSparses": "false",
+        "useDeltaMass": "true",
+        "fillOnlySignal": "true",
+        "yCandGenMax": "0.5",
+        "yCandRecoMax": "0.800000012",
+        "etaTrackMax": "0.800000012",
+        "ptTrackMin": "0.100000001",
+        "axisPt": {
+            "values": [
+                "0",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "8",
+                "12",
+                "24",
+                "50"
+            ]
+        },
+        "axisPtProng0": {
+            "values": [
+                "0",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "8",
+                "12",
+                "24",
+                "50"
+            ]
+        },
+        "axisPtProng1": {
+            "values": [
+                "0",
+                "0",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "8",
+                "12",
+                "24",
+                "50"
+            ]
+        },
+        "axisInvMassReso": {
+            "values": [
+                "200",
+                "0.49",
+                "0.89"
+            ]
+        },
+        "axisInvMassProng0": {
+            "values": [
+                "175",
+                "1.7",
+                "2.05"
+            ]
+        },
+        "axisInvMassProng1": {
+            "values": [
+                "80",
+                "0.46000000000000002",
+                "0.54000000000000004"
+            ]
+        },
+        "axisCosThetaStar": {
+            "values": [
+                "40",
+                "-1",
+                "1"
+            ]
+        },
+        "axisBkgBdtScore": {
+            "values": [
+                "100",
+                "0",
+                "1"
+            ]
+        },
+        "axisNonPromptBdtScore": {
+            "values": [
+                "100",
+                "0",
+                "1"
+            ]
+        },
+        "axisEta": {
+            "values": [
+                "30",
+                "-1.5",
+                "1.5"
+            ]
+        },
+        "axisOrigin": {
+            "values": [
+                "3",
+                "-0.5",
+                "2.5"
+            ]
+        },
+        "axisFlag": {
+            "values": [
+                "65",
+                "-32.5",
+                "32.5"
+            ]
+        },
+        "processDs1Data": "false",
+        "processDs1DataWithMl": "false",
+        "processDs2StarData": "false",
+        "processDs2StarDataWithMl": "false",
+        "processDs1Mc": "false",
+        "processDs1McWithMl": "false",
+        "processDs2StarMc": "false",
+        "processDs2StarMcWithMl": "true"
+    },
+    "internal-dpl-aod-writer": "",
+    "internal-dpl-aod-global-analysis-file-sink": "",
+    "internal-dpl-injected-dummy-sink": ""
+}

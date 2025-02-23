@@ -1,0 +1,25 @@
+# MC Rec data are stored in a Tree
+fileName: /home/lagliett/alice/CharmResonanceAnalysis/data/TreeTaskDs1LHC24g6.root
+treeNameRec: O2hfcandresolite
+treeNameGen: O2hfgenresolite
+pdgId: 435
+cutVars: 
+  pt:
+    min:  [ 2.0, 4.0, 6.0, 8.0, 12.] 
+    max:  [ 4.0, 6.0, 8.0, 12., 24.]
+    varname: 'fPt'
+  invMass:
+    min: [ 2.0, 4.0, 6.0, 8.0, 12.]
+    max: [ 2.0, 4.0, 6.0, 8.0, 12.]
+    varname: 'fM'
+  bkgBdtScore:
+    min:  [ ~, ~, ~, ~, ~] 
+    max:  [ 0.06, 0.06, 0.06, 0.06, 0.06]
+    varname: 'fMlScoreBkgBach0' 
+  nonPromptBdtScore:
+    min:  [ -1., -1., -1., -1., -1.] 
+    max:  [ ~, ~, ~, ~, ~]
+    varname: 'fMlScoreNonPromptBach0'
+acceptFlags: [1, 4, 6]
+output: /home/lagliett/alice/CharmResonanceAnalysis/output/efficiency/Eff_Ds1_LHC24g6.root
+

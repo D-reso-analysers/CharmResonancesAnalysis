@@ -117,11 +117,11 @@ def compute_significance(workspace):
 
 def perform_roofit_fit(df, pdgId, cfg, ipt):
     if pdgId == 10433:
-            mR = Particle.from_pdgid(pdgId).mass*1e-3
-            wR = Particle.from_pdgid(pdgId).width/2*1e-3
-            mD = Particle.from_pdgid(413).mass*1e-3
-            mV0 = Particle.from_pdgid(310).mass*1e-3
-            resoName = "Ds1"
+        mR = Particle.from_pdgid(pdgId).mass*1e-3
+        wR = Particle.from_pdgid(pdgId).width/2*1e-3
+        mD = Particle.from_pdgid(413).mass*1e-3
+        mV0 = Particle.from_pdgid(310).mass*1e-3
+        resoName = "Ds1"
     if pdgId == 435:
         mR = Particle.from_pdgid(pdgId).mass*1e-3
         wR = Particle.from_pdgid(pdgId).width/2*1e-3
@@ -170,11 +170,24 @@ def fit_with_roofit(cfg):
     outFileName = cfg['outputRawYield']
     outfile = ROOT.TFile(outFileName, "recreate")
     df = pd.read_parquet(os.path.join(outdir, cfg['filteredDf']))
-    signal_funcs = cfg['fit']['sgn_funcs']
-    background_funcs = cfg['fit']['bkg_funcs']
     pdgId = cfg['pdgId']
-    signal_list, bkg_list, signif_list, sigma_list, mean_list = [], [], [], [], []
-    signal_err_list, bkg_err_list, signif_err_list, sigma_err_list, mean_err_list = [], [], [], [], []
+    
+    # Define output histograms
+    pt_limits = pt_mins.copy()
+    pt_limits.append(pt_maxs[-1])
+    pt_limits = np.array(pt_limits, np.float64)
+
+    hist_rawyield = ROOT.TH1F(
+        "hist_rawyield", ";#it{p}_{T} (GeV/#it{c}); raw yield", len(pt_mins), pt_limits)
+    hist_sigma = ROOT.TH1F(
+        "hist_sigma", ";#it{p}_{T} (GeV/#it{c}); #sigma (GeV/#it{c}^{2})", len(pt_mins), pt_limits)
+    hist_mean = ROOT.TH1F(
+        "hist_mean", ";#it{p}_{T} (GeV/#it{c}); #mu (GeV/#it{c}^{2})", len(pt_mins), pt_limits)
+    
+    hist_rawyield.SetDirectory(0)
+    hist_sigma.SetDirectory(0)
+    hist_mean.SetDirectory(0)
+
     if pdgId == 10433:
             resoName = "Ds1"
     if pdgId == 435:
@@ -193,27 +206,35 @@ def fit_with_roofit(cfg):
         nBkg = workspace.var("nBkg")
         totPdf = workspace.pdf("totPdf")
 
+        hist_rawyield.SetBinContent(ipt+1, nSigR.getVal())
+        hist_rawyield.SetBinError(ipt+1, nSigR.getError())
+        hist_mean.SetBinContent(ipt+1, meanR.getVal())
+        hist_mean.SetBinError(ipt+1, meanR.getError())
+        hist_sigma.SetBinContent(ipt+1, sigmaR.getVal())
+        hist_sigma.SetBinError(ipt+1, sigmaR.getError())
+
         # Create a frame to draw the fit result and data
         mass_frame = mass.frame( cfg["fit"]["mass_mins"][ipt], cfg["fit"]["mass_maxs"][ipt], cfg["plot"]["nbins"][ipt])
         mass_frame.SetTitle(f"{resoName} mass pt {pt_min}-{pt_max}")
         data.plotOn(mass_frame)
-        totPdf.plotOn(mass_frame, ROOT.RooFit.Components("sigRPdf"), ROOT.RooFit.LineColor(ROOT.kGreen))
+        totPdf.plotOn(mass_frame, ROOT.RooFit.Components("sigRPdf"), ROOT.RooFit.LineColor(ROOT.kAzure + 2), ROOT.RooFit.FillColor(ROOT.kAzure-2))
         totPdf.plotOn(mass_frame, ROOT.RooFit.Components("bkgPdf"), ROOT.RooFit.LineColor(ROOT.kRed), ROOT.RooFit.LineStyle(ROOT.kDashed))
         totPdf.plotOn(mass_frame, ROOT.RooFit.LineColor(ROOT.kBlue))
     
         hresid = mass_frame.residHist()
 
         chi2 = mass_frame.chiSquare()  # Compute chi-squared/ndf
-        legend = ROOT.TLegend(0.4, 0.6, 0.8, 0.9)  # Create a legend at a specified position
+        legend = ROOT.TLegend(0.3, 0.15, 0.8, 0.45)  # Create a legend at a specified position
         legend.SetBorderSize(0)
         legend.SetFillStyle(0)  # Transparent background
-        legend.SetTextSize(0.04)
-        canvas_yield = ROOT.TCanvas("canvas_yield", "canvas_yield", 800, 600)
+        legend.SetTextSize(0.035)
+        canvas_yield = ROOT.TCanvas("canvas_yield", "canvas_yield", 900, 900)
         legend.AddEntry("", f"#chi^{{2}}/ndf = {chi2:.2f}", "")  # Add chi-squared
-        legend.AddEntry("", f"Mean = {meanR.getVal():.4f} #pm {meanR.getError():.4f} GeV/c^2", "")  # Add mean
-        legend.AddEntry("", f"Sigma = {sigmaR.getVal():.4f} #pm {sigmaR.getError():.4f} GeV/c^2", "")  # Add sigma
+        legend.AddEntry("", f"Mean = {(meanR.getVal()*1000):.2f} #pm {(meanR.getError()*1000):.2f} MeV/c^{{2}}", "")  # Add mean
+        legend.AddEntry("", f"Sigma = {(sigmaR.getVal()*1000):.2f} #pm {(sigmaR.getError()*1000):.2f} MeV/c^{{2}}", "")  # Add sigma
         legend.AddEntry("", f"Nsig = {nSigR.getVal():.0f} #pm {nSigR.getError():.0f}", "")
         signifcance = compute_significance(workspace)
+
         legend.AddEntry("", f"Significance = {signifcance:.1f}", "")
         print(f"#chi^{{2}}/ndf = {chi2:.2f}")
         print(f"Mean = {meanR.getVal():.4f} #pm {meanR.getError():.4f} GeV/c^2")  # Add mean
@@ -224,6 +245,15 @@ def fit_with_roofit(cfg):
         
         mass_frame_res = mass.frame( cfg["fit"]["mass_mins"][ipt], cfg["fit"]["mass_maxs"][ipt], cfg["plot"]["nbins"][ipt])
         data.plotOn(mass_frame_res)
+        hist = mass_frame.getHist("data")  # 0 if it's the first histogram plotted
+
+        # Check if the histogram exists and get the maximum value
+        if hist:
+            max_value = hist.GetMaximum()
+            y_max = 1.5 * max_value  # Scale the maximum value
+            mass_frame.SetMaximum(y_max)  # Set the y-axis maximum
+        else:
+            print("No histogram found in the RooPlot. Ensure data is plotted first.")
         totPdf.plotOn(mass_frame_res, ROOT.RooFit.Components("sigRPdf"), ROOT.RooFit.LineColor(ROOT.kGreen))
         totPdf.plotOn(mass_frame_res, ROOT.RooFit.LineColor(ROOT.kBlue))
         totPdf.plotOn(mass_frame_res, ROOT.RooFit.Components("bkgPdf"), ROOT.RooFit.LineColor(ROOT.kRed), ROOT.RooFit.LineStyle(ROOT.kDashed))
@@ -236,6 +266,22 @@ def fit_with_roofit(cfg):
         # data.plotOn(mf2, ROOT.RooFit.ResLevel(RooAbsData.Residual))
         # totPdf.plotOn(mass_frame_res, ROOT.RooFit.Components("sigRPdf"), ROOT.RooFit.LineColor(ROOT.kGreen))
 
+        xaxis = mass_frame.GetXaxis()
+        x_min = xaxis.GetXmin()
+        x_max = xaxis.GetXmax()
+        n_bins = xaxis.GetNbins()
+
+        # Calculate the bin width
+        bin_width = (x_max - x_min) / n_bins
+
+        # Format the y-axis title with bin width
+        y_title = f"Counts per {(bin_width*1000):.0f} MeV/c^{{2}}"
+        mass_frame.GetYaxis().SetTitle(y_title)
+        mass_frame.GetXaxis().SetTitle(f"M(K#pi#piK^{{0}}_{{S}})-M(K#pi#pi) (GeV/c^{{2}})")
+
+        # Optionally adjust text size and positioning
+        mass_frame.GetYaxis().SetTitleSize(0.035)
+        mass_frame.GetYaxis().SetTitleOffset(1.5)
 
         mass_frame.Draw()
         legend.Draw("same")
@@ -243,10 +289,14 @@ def fit_with_roofit(cfg):
         # mf2.Draw()
         
        
-        canvas_yield.SaveAs(os.path.join(outdir, f"{cfg['plotLabel']}_pt{pt_min}-{pt_max}.pdf"))
+        canvas_yield.SaveAs(os.path.join(outdir, "plots", f"{cfg['plotLabel']}_pt{pt_min}-{pt_max}.pdf"))
         # canvas_res.SaveAs(os.path.join(outdir, f"{cfg['plotLabel']}_res_pt{pt_min}-{pt_max}.pdf"))
-
-
+    outfile.cd()
+    hist_rawyield.Write()
+    hist_sigma.Write()
+    hist_mean.Write()
+    outfile.Close()
+    
 # main
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Arguments to pass')

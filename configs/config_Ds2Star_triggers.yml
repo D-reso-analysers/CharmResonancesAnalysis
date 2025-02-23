@@ -1,22 +1,23 @@
 # -----inputs for raw yields --------------------------
-fileNameData: /home/lagliett/alice/CharmResonancesAnalysis/data/AO2D_Ds2Star_Trg.root # Task output not there
+fileNameData: /home/luca/alice/CharmResonancesAnalysis/data/AO2D_Ds2Star_Trg.root # Task output not there
 treeNameData: O2hfcandresolite
-outputRawYield: /home/lagliett/alice/CharmResonancesAnalysis/raw_yield/output/rawYieldDs2Star_TRG.root
+outputRawYield: raw_yield/rawYieldDs2Star_TRG.root
 filteredDf: filteredTreeTaskDs2Star_TRG.parquet
 plotLabel: invMass_Ds2Star_TRG
 # -----inputs for efficiencies ------------------------
-fileNameMC : /home/lagliett/alice/CharmResonancesAnalysis/data/TreeTask_DplusV0_TRGcuts_LHC24g6_train302309.root
-# fileNameMC : /home/lagliett/alice/CharmResonancesAnalysis/data/TreeTask_Ds2Star_TRGcuts_LHC24g6.root
+fileNameMC : [data/ds2_TRG_LHC24g6_train302309.root, data/ds2_TRG_h2_train302430.root]
+mcWeights: [1, 7]
+# fileNameMC : data/TreeTask_Ds2Star_TRGcuts_LHC24g6.root
 treeNameRec: O2hfcandresolite
 treeNameGen: O2hfgenresolite
-outputEff: /home/lagliett/alice/CharmResonancesAnalysis/efficiency/efficiency_Ds2Star_LHC24g6_TRG.root
+outputEff: efficiency/efficiency_Ds2Star_combined_TRG.root
 # -----particle pdgcode: Ds1:10433, Ds2*:435 -----------
 pdgId: 435
 # -----Cuts, same for efficiencies and yields-----------
 cutVars: 
   pt:
-    min:  [ 2.0, 4.0, 6.0, 8.0, 12., 5] 
-    max:  [ 4.0, 6.0, 8.0, 12., 24., 24]
+    min:  [ 2.0, 4.0, 6.0, 8.0, 12.] 
+    max:  [ 4.0, 6.0, 8.0, 12., 24.]
     varname: 'fPt'
     useBachPt: false
   ptBach0:
@@ -24,22 +25,22 @@ cutVars:
     max:  [2.0, 3.0, 5.0, 8.0, 12., 16., 24.]
     varname: 'fPtBach0'
     useBachPt: false
-  invMass:
-    min: [ 0.49, 0.49, 0.49, 0.49, 0.49, 0.49]
-    max: [ 0.89, 0.89, 0.89, 0.89, 0.89, 0.89]
-    varname: 'fM'
-    useBachPt: false
+  # invMass:
+  #   min: [ 0.49, 0.49, 0.49, 0.49, 0.49, 0.49]
+  #   max: [ 0.89, 0.89, 0.89, 0.89, 0.89, 0.89]
+  #   varname: 'fM'
+  #   useBachPt: false
   bkgBdtScore:
     min:  [ ~, ~, ~, ~, ~, ~, ~, ~, ~] 
     max:  [ 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04, 0.04]
     varname: 'fMlScoreBkgBach0'
     useBachPt: true
   invMassProng0:
-    min:  [1.80, 1.80, 1.80, 1.80, 1.80, 1.80, 1.80] 
-    max:  [1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92]
+    min:  [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75] 
+    max:  [1.95, 1.95, 1.95, 1.95, 1.95, 1.95, 1.95]
     varname: 'fMBach0'
     useBachPt: true
-    parametrized: true
+    parametrized: false
     params: 
       deltaMassConst: -0.00245
       deltaMassLinear: 0.0001
@@ -47,11 +48,51 @@ cutVars:
       sigmaLinear: 0.00176
       nSigma: 2
       ptMaxDelta: 10 
-  invMassProng1:
-    min:  [ 0.4882, 0.4882, 0.4882, 0.4882, 0.4882, 0.4882] 
-    max:  [ 0.5050, 0.5050, 0.5050, 0.5050, 0.5050, 0.5050]
-    varname: 'fMBach1'
+  # invMassProng1:
+  #   min:  [ 0.485, 0.485, 0.485, 0.485, 0.485, 0.485, 0.485] 
+  #   max:  [ 0.5085, 0.5085, 0.5085, 0.5085, 0.5085, 0.5085, 0.5085]
+  #   varname: 'fMBach1'
+  #   useBachPt: false
+  # cpaBach1:
+  #   min:  [0.995, 0.995, 0.995, 0.995, 0.995, 0.995, 0.995]
+  #   max:  [~, ~, ~, ~, ~, ~, ~] 
+  #   varname: 'fCpaBach1'
+  #   useBachPt: false
+  # radiusBach1:
+  #   min:  [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0] 
+  #   max:  [~, ~, ~, ~, ~, ~, ~] 
+  #   varname: 'fRadiusBach1'
+  #   useBachPt: false
+  itsNCls0:
+    min:  [ 4, 4, 4, 4, 4, 4, 4] 
+    max:  [ ~, ~, ~, ~, ~, ~, ~]
+    varname: 'fItsNClsProngMinBach0'
     useBachPt: false
+  tpcRows0:
+    min:  [ 70, 70, 70, 70, 70, 70, 70] 
+    max:  [ ~, ~, ~, ~, ~, ~, ~]
+    varname: 'fTpcNClsCrossedRowsProngMinBach0'
+    useBachPt: false
+  tpcChi0:
+    min:  [ ~, ~, ~, ~, ~, ~, ~] 
+    max:  [ 4, 4, 4, 4, 4, 4, 4]
+    varname: 'fTpcChi2NClProngMaxBach0'
+    useBachPt: false
+  # itsNCls1:
+  #   min:  [ 0, 0, 0, 0, 0, 0, 0] 
+  #   max:  [ ~, ~, ~, ~, ~, ~, ~]
+  #   varname: 'fItsNClsProngMinBach1'
+  #   useBachPt: false
+  # tpcRows1:
+  #   min:  [ 70, 70, 70, 70, 70, 70, 70] 
+  #   max:  [ ~, ~, ~, ~, ~, ~, ~]
+  #   varname: 'fTpcNClsCrossedRowsProngMinBach1'
+  #   useBachPt: false
+  # tpcChi1:
+  #   min:  [ ~, ~, ~, ~, ~, ~, ~] 
+  #   max:  [ 4, 4, 4, 4, 4, 4, 4]
+  #   varname: 'fTpcChi2NClProngMaxBach1'
+  #   useBachPt: false
 # -----Invariant mass signal extraction configs-----------
 fit:
   mass_mins: [ 0.60, 0.60, 0.60, 0.60, 0.60, 0.60]

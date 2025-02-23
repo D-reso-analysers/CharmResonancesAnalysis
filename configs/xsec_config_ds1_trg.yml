@@ -1,0 +1,20 @@
+# -----input files --------------------------
+rawYieldFile: raw_yield/rawYieldDs1_TRG_central.root
+rawYieldHist: hist_rawyield
+effFile: efficiency/efficiency_Ds1_combined_TRG_central.root
+effHist: hEffPrompt
+fracFile: "data/fraction_ds1_pp13dot6tev_MB_triggerCuts.root"
+fracHist: "hist_frac_prompt_reso_vs_pt"
+luminosityFile: /home/lagliett/alice/CharmResonancesAnalysis/normalisation/luminosityDs1_trigger.root
+luminosityHist: hist_lumi
+particle: ds1
+# -----systematics ------------------------
+systematics:
+  pt:
+    min:  [2.0, 3.0, 4.0, 5.0, 6.0, 8.0, 12.] 
+    max:  [3.0, 4.0, 5.0, 6.0, 8.0, 12., 24.]
+  relSyst: [0.26, 0.25, 0.23, 0.23, 0.22, 0.22, 0.22]
+# -----output file
+outfile: xsec_Ds1_trg_syst.root
+# -----plot file
+plotFile: xsec_Ds1_trg_syst.pdf
