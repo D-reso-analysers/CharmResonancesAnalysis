@@ -166,7 +166,7 @@ def project(input_config):
             sparse_gennp[ifile].GetAxis(0).SetRange(pt_bin_min, pt_bin_max)
             sparse_genp[ifile].GetAxis(axis_y_gen).SetRange(y_bin_min, y_bin_max)
             sparse_gennp[ifile].GetAxis(axis_y_gen).SetRange(y_bin_min, y_bin_max)
-            if not include_pitomu: # exlcude pi->mu decays from signal
+            if not include_pitomu and cfg["hadron"] == "dstar": # exlcude pi->mu decays from signal
                 sparse_recop[ifile].GetAxis(4).SetRange(1, 1)
                 sparse_reconp[ifile].GetAxis(4).SetRange(1, 1)
             if ifile == 0:

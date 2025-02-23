@@ -17,9 +17,9 @@ def get_lumi(infile_names, suffix):
         infile = ROOT.TFile.Open(infile_name)
         hist_collisions = infile.Get("hf-candidate-creator-dstar/hCollisions")
         if not isinstance(hist_collisions, ROOT.TH1):
-            hist_collisions = infile.Get("hf-candidate-creator-3-prong/hCollisions")
-        n_bins = hist_collisions.GetNbinsX()
-        zvtx_eff = hist_collisions.GetBinContent(n_bins) / hist_collisions.GetBinContent(n_bins-1)
+            hist_collisions = infile.Get("hf-candidate-creator-3prong/hCollisions")
+        ibin_zvtx = hist_collisions.GetXaxis().FindBin("PV #it{z}")
+        zvtx_eff = hist_collisions.GetBinContent(ibin_zvtx) / hist_collisions.GetBinContent(ibin_zvtx-1)
         hist_lumi_per_run.append(infile.Get("bc-selection-task/hLumiTVXafterBCcuts"))
         for ibin in range(1, hist_lumi_per_run[-1].GetNbinsX()+1):
             lumi += hist_lumi_per_run[-1].GetBinContent(ibin) * zvtx_eff # mub-1
