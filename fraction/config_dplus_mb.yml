@@ -1,13 +1,13 @@
 hadron: dplus
 
 input:
-  data: inputs/sparse_dplus_LHC22_LHC23_MB_full.root
-  mc: [inputs/sparse_dplus_MBcuts_LHC24g5_train297397.root, inputs/sparse_dplus_MBcuts_LHC24h1_train298922.root]
+  data: inputs/sparse_dplus_LHC22_LHC23_BDTAnalysis.root
+  mc: [inputs/sparse_dplus_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis.root] #, inputs/sparse_dplus_LHC24g5_trackTuner_ptSmearing1p5_BDTAnalysis.root
+  corrbkg: [inputs/AO2D_dplus_templates_LHC24k3.root, inputs/AO2D_dplus_templates_LHC24g5.root, inputs/AO2D_dplus_templates_LHC24h1.root]
   mc_weights: [1., 2.3333] # if only one file ignored
 
 pt_mins: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10., 12., 16.]
 pt_maxs: [2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10., 12., 16., 24.]
-
 bdt_cuts:
   bkg: [0.01, 0.01, 0.02, 0.02, 0.07, 0.07, 0.07, 0.1, 0.1, 0.1, 0.2, 0.3 ]
   nonprompt: [0.30, 0.34, 0.38,
@@ -19,10 +19,11 @@ bdt_cuts:
               0.90, 0.94, 0.98] # values for cut-variation method (pT differential?)
 
 fit:
-  mass_mins: [1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.75, 1.70, 1.70]
-  mass_maxs: [1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 1.99, 2.05, 2.05]
+  mass_mins: [1.76, 1.76, 1.75, 1.72, 1.72, 1.72, 1.72, 1.72, 1.72, 1.72, 1.72, 1.72] 
+  mass_maxs: [1.98, 1.98, 1.98, 2.00, 2.00, 2.00, 2.00, 2.00, 2.00, 2.00, 2.00, 2.00] 
   sgn_funcs: ["gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian", "gaussian"]
-  bkg_funcs: ["chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3", "chebpol3"]
+  bkg_funcs: ["chebpol2", "chebpol2", "chebpol2", "expo", "expo", "expo", "expo", "expo", "expo", "expo", "expo", "expo"]
+  fix_frac_bkgcorr: [True, True, True, True, True, True, True, True, True, True, True, True]
 
 efficiency:
   include_pitomu: True
@@ -30,8 +31,7 @@ efficiency:
 output:
   rawyields:
     directory: rawyields
-    suffix: _dplus_LHC23_MB
+    suffix: _dplus_LHC22_LHC23_BDTAnalysis
   efficiencies:
     directory: efficiencies
-    suffix: _dplus_LHC24g5_LHC24h1_new
-    suffix: _dplus_LHC24g5_LHC24h1_new
+    suffix: _dplus_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis

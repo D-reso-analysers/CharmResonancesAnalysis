@@ -3,6 +3,7 @@ hadron: dstar
 input:
   data: inputs/sparse_dstar_LHC22_LHC23_BDTAnalysis.root
   mc: [inputs/sparse_dstar_LHC24g5_trackTuner_ptSmearing1p5_BDTAnalysis.root, inputs/sparse_dstar_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis.root]
+  corrbkg: null
   mc_weights: [1., 2.3333] # 1 and 7./3 which approximatelly should reproduce the data 
 
 pt_mins: [1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10., 12., 16.]
@@ -24,6 +25,7 @@ fit:
   mass_maxs: [0.160, 0.165, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700, 0.1700]
   sgn_funcs: ["doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb", "doublecb"]
   bkg_funcs: ["expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext", "expopowext"]
+  fix_frac_bkgcorr: [False, False, False, False, False, False, False, False, False, False, False, False]
 
 efficiency:
   include_pitomu: true
