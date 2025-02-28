@@ -1,0 +1,129 @@
+bdt_cuts:
+  bkg:
+  - 0.013500000000000002
+  - 0.017974999999999998
+  - 0.034
+  - 0.034
+  - 0.1155
+  - 0.1155
+  - 0.1155
+  - 0.15250000000000002
+  - 0.15250000000000002
+  - 0.15250000000000002
+  - 0.2855
+  - 0.375
+  nonprompt: []
+efficiency:
+  include_pitomu: true
+fit:
+  bkg_funcs:
+  - chebpol2
+  - chebpol2
+  - chebpol2
+  - expo
+  - expo
+  - expo
+  - expo
+  - expo
+  - expo
+  - expo
+  - expo
+  - expo
+  fix_frac_bkgcorr:
+  - true
+  - true
+  - true
+  - true
+  - true
+  - true
+  - true
+  - true
+  - true
+  - true
+  - true
+  - true
+  mass_maxs:
+  - 1.98
+  - 1.98
+  - 1.98
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
+  - 2.0
+  mass_mins:
+  - 1.76
+  - 1.76
+  - 1.75
+  - 1.72
+  - 1.72
+  - 1.72
+  - 1.72
+  - 1.72
+  - 1.72
+  - 1.72
+  - 1.72
+  - 1.72
+  sgn_funcs:
+  - gaussian
+  - gaussian
+  - gaussian
+  - gaussian
+  - gaussian
+  - gaussian
+  - gaussian
+  - gaussian
+  - gaussian
+  - gaussian
+  - gaussian
+  - gaussian
+hadron: dplus
+input:
+  corrbkg:
+  - inputs/AO2D_dplus_templates_LHC24k3.root
+  - inputs/AO2D_dplus_templates_LHC24g5.root
+  - inputs/AO2D_dplus_templates_LHC24h1.root
+  data: inputs/sparse_dplus_LHC22_LHC23_BDTAnalysis.root
+  mc:
+  - inputs/sparse_dplus_LHC24g5_trackTuner_ptSmearing1p5_BDTAnalysis.root
+  - inputs/sparse_dplus_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis.root
+  mc_weights:
+  - 1.0
+  - 2.3333
+output:
+  efficiencies:
+    directory: systematics
+    suffix: _dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis_loose6
+  rawyields:
+    directory: rawyields
+    suffix: _dplus_LHC22_LHC23_BDTAnalysis
+pt_maxs:
+- 2.0
+- 3.0
+- 4.0
+- 5.0
+- 6.0
+- 7.0
+- 8.0
+- 9.0
+- 10.0
+- 12.0
+- 16.0
+- 24.0
+pt_mins:
+- 1.0
+- 2.0
+- 3.0
+- 4.0
+- 5.0
+- 6.0
+- 7.0
+- 8.0
+- 9.0
+- 10.0
+- 12.0
+- 16.0

@@ -47,7 +47,7 @@ def reduce(infile_name, outfile_name, is_mc):
     """
 
     axes_to_keep = np.array([0, 1, 2, 4], dtype=np.int32)
-    axes_to_keep_np = np.array([0, 1, 4, 6], dtype=np.int32)
+    axes_to_keep_np = np.array([0, 1, 2, 4], dtype=np.int32)
 
     infile = ROOT.TFile.Open(infile_name)
     outfile = ROOT.TFile(outfile_name, "recreate")
