@@ -1,0 +1,55 @@
+{
+    "rawyields": {
+        "inputdir": "rawyields",
+        "inputfiles": [
+            "rawyields_bdtnp0.30_dplus_LHC22_LHC23.root",
+            "rawyields_bdtnp0.36_dplus_LHC22_LHC23.root",
+            "rawyields_bdtnp0.42_dplus_LHC22_LHC23.root",
+            "rawyields_bdtnp0.48_dplus_LHC22_LHC23.root",
+            "rawyields_bdtnp0.54_dplus_LHC22_LHC23.root",
+            "rawyields_bdtnp0.60_dplus_LHC22_LHC23.root",
+            "rawyields_bdtnp0.66_dplus_LHC22_LHC23.root",
+            "rawyields_bdtnp0.72_dplus_LHC22_LHC23.root",
+            "rawyields_bdtnp0.78_dplus_LHC22_LHC23.root",
+            "rawyields_bdtnp0.84_dplus_LHC22_LHC23.root",
+            "rawyields_bdtnp0.90_dplus_LHC22_LHC23.root"
+        ],
+        "histoname": "hist_rawyield"
+    },
+    "efficiencies": {
+        "inputdir": "efficiencies",
+        "inputfiles": [
+            "efficiencies_bdtnp0.30_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.36_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.42_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.48_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.54_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.60_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.66_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.72_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.78_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.84_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+            "efficiencies_bdtnp0.90_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root"
+        ],
+        "histonames": {
+            "prompt": "hist_eff_prompt",
+            "nonprompt": "hist_eff_nonprompt"
+        }
+    },
+    "minimisation": {
+        "correlated": true
+    },
+    "central_efficiency": {
+        "computerawfrac": true,
+        "inputdir": "efficiencies",
+        "inputfile": "efficiencies_nocutnp_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis.root",
+        "histonames": {
+            "prompt": "hist_eff_prompt",
+            "nonprompt": "hist_eff_nonprompt"
+        }
+    },
+    "output": {
+        "directory": "systematics",
+        "file": "cutvar_dplus_pp13dot6tev_MB_triggerCuts_altstep1.root"
+    }
+}
