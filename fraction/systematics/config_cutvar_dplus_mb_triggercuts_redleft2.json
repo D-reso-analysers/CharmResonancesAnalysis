@@ -2,9 +2,6 @@
     "rawyields": {
         "inputdir": "rawyields",
         "inputfiles": [
-            "rawyields_bdtnp0.30_dplus_LHC22_LHC23.root",
-            "rawyields_bdtnp0.32_dplus_LHC22_LHC23.root",
-            "rawyields_bdtnp0.34_dplus_LHC22_LHC23.root",
             "rawyields_bdtnp0.36_dplus_LHC22_LHC23.root",
             "rawyields_bdtnp0.38_dplus_LHC22_LHC23.root",
             "rawyields_bdtnp0.40_dplus_LHC22_LHC23.root",
@@ -39,9 +36,6 @@
     "efficiencies": {
         "inputdir": "efficiencies",
         "inputfiles": [
-            "efficiencies_bdtnp0.30_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
-            "efficiencies_bdtnp0.32_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
-            "efficiencies_bdtnp0.34_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
             "efficiencies_bdtnp0.36_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
             "efficiencies_bdtnp0.38_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
             "efficiencies_bdtnp0.40_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
@@ -82,14 +76,14 @@
     "central_efficiency": {
         "computerawfrac": true,
         "inputdir": "efficiencies",
-        "inputfile": "efficiencies_nocutnp_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5.root",
+        "inputfile": "efficiencies_nocutnp_dplus_LHC24g5_LHC24h1_trackTuner_ptSmearing1p5_BDTAnalysis.root",
         "histonames": {
             "prompt": "hist_eff_prompt",
             "nonprompt": "hist_eff_nonprompt"
         }
     },
     "output": {
-        "directory": "cutvariation",
-        "file": "cutvar_dplus_pp13dot6tev_MB_new.root"
+        "directory": "systematics",
+        "file": "cutvar_dplus_pp13dot6tev_MB_triggerCuts_redleft2.root"
     }
 }
