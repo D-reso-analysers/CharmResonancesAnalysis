@@ -80,7 +80,7 @@ def get_ratio_fonll(df_num, df_den, graph_name, graph_color):
 
     return graph_ratio
 
-def get_corr_factor(infile_fonll_num, infile_fonll_den):
+def get_corr_factor(infile_fonll_num, infile_fonll_den, outfile_name):
     """
     """
 
@@ -110,9 +110,9 @@ def get_corr_factor(infile_fonll_num, infile_fonll_den):
     )
     frame.GetYaxis().SetDecimals()
     graph_ratio.Draw("p2")
-    canv.SaveAs("fonll_ratio_dmix_13dot6tev_13tev.pdf")
+    canv.SaveAs(outfile_name.replace(".root", ".pdf"))
 
-    outfile = ROOT.TFile("fonll_ratio_dmix_13dot6tev_13tev.root", "recreate")
+    outfile = ROOT.TFile(outfile_name, "recreate")
     graph_ratio.Write()
     canv.Write()
     outfile.Close()
@@ -121,11 +121,14 @@ def get_corr_factor(infile_fonll_num, infile_fonll_den):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Arguments")
     parser.add_argument("--infile_num", "-n", metavar="text",
-                        default="fonll_dmix_y05_13dot6tev.txt",
+                        default="fonll_dmix_y05_13dot6tev_dsbins.txt",
                         help="fonll file for numerator", required=False)
     parser.add_argument("--infile_den", "-d", metavar="text",
-                        default="fonll_dmix_y05_13tev.txt",
+                        default="fonll_dmix_y05_13tev_dsbins.txt",
                         help="fonll file for denominator", required=False)
+    parser.add_argument("--outfile", "-o", metavar="text",
+                        default="fonll_ratio_dmix_13dot6tev_13tev_dsbins.root",
+                        help="output file name", required=False)
     args = parser.parse_args()
 
-    get_corr_factor(args.infile_num, args.infile_den)
+    get_corr_factor(args.infile_num, args.infile_den, args.outfile)
